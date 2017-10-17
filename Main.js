@@ -3,7 +3,7 @@
 // @namespace    SuperhexIoScr1pt
 // @version      0.1.1
 // @description  Script para Superhex.io / Script for Superhex.io
-// @author       TBM
+// @author       Truebamateo
 // @match        http://superhex.io/*
 // @grant        none
 // ==/UserScript==

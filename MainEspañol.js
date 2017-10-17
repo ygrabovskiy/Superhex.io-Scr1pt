@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
 // @namespace    SuperhexIoScr1pt
-// @version      0.1.1
+// @version      0.1.2
 // @description  Script para Superhex.io / Script for Superhex.io
 // @author       Truebamateo
 // @match        http://superhex.io/*
@@ -47,7 +47,7 @@ commandsTBM = function(cmd){
       superhex.createParty();
     } else if(cmd == "Novedades" || cmd == "novedades" || cmd == "NOVEDADES")
     {
-        alert(" Novedades de la versión 0.1.1:\n+ Añadido botón en la pantalla de respawn.\n+ Añadido comando Texto1 el cual cambia el texto del botón Play.");
+        alert(" Novedades de la versión 0.1.2:\n* Mínimas mejoras.");
     } else if(cmd == "Skin" || cmd == "skin" || cmd == "SKIN")
     {
         var SkinPrompt = window.prompt("ID de la Skin: (Si te abre una página, cierrala)");

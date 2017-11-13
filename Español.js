@@ -4,7 +4,7 @@
 // @version      0.1.3
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
 // @icon         http://superhex.io/img/fav_icon_1.png
-// @description  Script para Superhex.io / Script for Superhex.io
+// @description  Script para Superhex.io
 // @author       Truebamateo
 // @match        http://superhex.io/*
 // @grant        none

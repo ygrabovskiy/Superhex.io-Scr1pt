@@ -16,7 +16,6 @@ var Text1TBM = window.localStorage.getItem("Text1TBM");
 if(Text1TBM)
    {
     document.getElementById("button-play-text").innerText = Text1TBM;
-       console.log("Text1 OK");
    }
 
 document.onkeydown = function(e){

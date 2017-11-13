@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
 // @namespace    SuperhexIoScr1pt
-// @version      0.1.2
+// @version      0.1.3
+// @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
+// @icon         http://superhex.io/img/fav_icon_1.png
 // @description  Script for Superhex.io
 // @author       Truebamateo
 // @match        http://superhex.io/*
@@ -10,19 +12,12 @@
 
 
 var Text1TBM = window.localStorage.getItem("Text1TBM");
-//var Text2TBM = window.localStorage.getItem("Text2TBM");
 
 if(Text1TBM)
    {
     document.getElementById("button-play-text").innerText = Text1TBM;
        console.log("Text1 OK");
    }
-
-/* if(Text2TBM)
-   {
-    document.getElementById("button-play-again-text").innerText = Text2TBM;
-       console.log("Text2 OK");
-   } */
 
 document.onkeydown = function(e){
     e = e || window.event;
@@ -36,7 +31,7 @@ commandsTBM = function(cmd){
     cmd = window.prompt("Superhex.io Scr1pt by Truebamateo - Insert command: (For view the command list type Help)");
     if (cmd == "Help" || cmd == "help" || cmd == "HELP")
     {
-        alert(" Commands:\Help: Open the command list.\nQuality: Sets the game quality.\nParty: Makes a party to play with your friends.\nChangelog: Open the changelog.\nSkin: Selects the skin what you want to use.\nKeys: Opens the special keys list.\nText1: Changes the text of the button Play.");
+        alert(" Commands:\Help: Open the command list.\nQuality: Sets the game quality.\nParty: Makes a party to play with your friends.\nSkin: Selects the skin what you want to use.\nKeys: Opens the special keys list.\nText1: Changes the text of the button Play.");
     } else if(cmd == "Quality" || cmd == "quality" || cmd == "QUALITY")
     {
         var QualityPrompt = window.prompt("Quality of the game: (Max 2.8)");
@@ -45,9 +40,6 @@ commandsTBM = function(cmd){
     } else if(cmd == "Party" || cmd == "party" || cmd == "PARTY")
     {
       superhex.createParty();
-    } else if(cmd == "Changelog" || cmd == "changelog" || cmd == "CHANGELOG")
-    {
-        alert(" Changes of the version 0.1.2:\n* Some improvements");
     } else if(cmd == "Skin" || cmd == "skin" || cmd == "SKIN")
     {
         var SkinPrompt = window.prompt("ID of the Skin: (If a website opens, close it)");

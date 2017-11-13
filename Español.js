@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
 // @namespace    SuperhexIoScr1pt
-// @version      0.1.2
+// @version      0.1.3
+// @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
+// @icon         http://superhex.io/img/fav_icon_1.png
 // @description  Script para Superhex.io / Script for Superhex.io
 // @author       Truebamateo
 // @match        http://superhex.io/*
@@ -10,19 +12,11 @@
 
 
 var Text1TBM = window.localStorage.getItem("Text1TBM");
-//var Text2TBM = window.localStorage.getItem("Text2TBM");
 
 if(Text1TBM)
    {
     document.getElementById("button-play-text").innerText = Text1TBM;
-       console.log("Text1 OK");
    }
-
-/* if(Text2TBM)
-   {
-    document.getElementById("button-play-again-text").innerText = Text2TBM;
-       console.log("Text2 OK");
-   } */
 
 document.onkeydown = function(e){
     e = e || window.event;
@@ -36,7 +30,7 @@ commandsTBM = function(cmd){
     cmd = window.prompt("Superhex.io Scr1pt por TBM - Insertar comando: (Para ver la lista de comandos insertar Ayuda)");
     if (cmd == "Ayuda" || cmd == "ayuda" || cmd == "AYUDA")
     {
-        alert(" Comandos:\nAyuda: Muestra la lista de comandos.\nCalidad: Establece la calidad del juego.\nParty: Crea una party para jugar con tus amig@s.\nNovedades: Muestra las novedades y cambios de la última versión del script.\nSkin: Selecciona la skin que quieres utilizar.\nTeclas: Muestra la lista de las teclas con funciones.\nTexto1: Cambia el texto del botón Play.");
+        alert(" Comandos:\nAyuda: Muestra la lista de comandos.\nCalidad: Establece la calidad del juego.\nParty: Crea una party para jugar con tus amig@s.\nSkin: Selecciona la skin que quieres utilizar.\nTeclas: Muestra la lista de las teclas con funciones.\nTexto1: Cambia el texto del botón Play.");
     } else if(cmd == "Calidad" || cmd == "calidad" || cmd == "CALIDAD")
     {
         var QualityPrompt = window.prompt("Calidad del juego: (Máximo 2.8)");
@@ -45,9 +39,6 @@ commandsTBM = function(cmd){
     } else if(cmd == "Party" || cmd == "party" || cmd == "PARTY")
     {
       superhex.createParty();
-    } else if(cmd == "Novedades" || cmd == "novedades" || cmd == "NOVEDADES")
-    {
-        alert(" Novedades de la versión 0.1.2:\n* Mínimas mejoras.");
     } else if(cmd == "Skin" || cmd == "skin" || cmd == "SKIN")
     {
         var SkinPrompt = window.prompt("ID de la Skin: (Si te abre una página, cierrala)");

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
 // @namespace    SuperhexIoScr1pt
-// @version      0.1.3
+// @version      0.1.4
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
 // @icon         http://superhex.io/img/fav_icon_1.png
 // @description  Script for Superhex.io
@@ -30,7 +30,7 @@ commandsTBM = function(cmd){
     cmd = window.prompt("Superhex.io Scr1pt by Truebamateo - Insert command: (For view the commands list type Commands)");
     if (cmd == "Commands" || cmd == "commands" || cmd == "COMMANDS")
     {
-        alert(" Commands:\nCommands: Open the command list.\nQuality: Sets the game quality.\nParty: Makes a party to play with your friends.\nSkin: Selects the skin what you want to use.\nKeys: Opens the special keys list.\nText1: Changes the text of the Play button.");
+        alert(" Commands:\nCommands: Open the commands list.\nQuality: Sets the game quality.\nParty: Makes a party to play with your friends.\nSkin: Selects the skin what you want to use.\nKeys: Opens the special keys list.\nText1: Changes the text of the Play button.");
     } else if(cmd == "Quality" || cmd == "quality" || cmd == "QUALITY")
     {
         var QualityPrompt = window.prompt("Quality of the game: (Max 2.8)");

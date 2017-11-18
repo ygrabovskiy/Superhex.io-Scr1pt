@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
 // @namespace    SuperhexIoScr1pt
-// @version      0.1.3
+// @version      0.1.4
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
 // @icon         http://superhex.io/img/fav_icon_1.png
 // @description  Script para Superhex.io
@@ -27,10 +27,10 @@ document.onkeydown = function(e){
 };
 
 commandsTBM = function(cmd){
-    cmd = window.prompt("Superhex.io Scr1pt por TBM - Insertar comando: (Para ver la lista de comandos insertar Ayuda)");
-    if (cmd == "Ayuda" || cmd == "ayuda" || cmd == "AYUDA")
+    cmd = window.prompt("Superhex.io Scr1pt por Truebamateo - Insertar comando: (Para ver la lista de comandos insertar Comandos)");
+    if (cmd == "Comandos" || cmd == "comandos" || cmd == "COMANDOS")
     {
-        alert(" Comandos:\nAyuda: Muestra la lista de comandos.\nCalidad: Establece la calidad del juego.\nParty: Crea una party para jugar con tus amig@s.\nSkin: Selecciona la skin que quieres utilizar.\nTeclas: Muestra la lista de las teclas con funciones.\nTexto1: Cambia el texto del botón Play.");
+        alert(" Comandos:\nComandos: Muestra la lista de comandos.\nCalidad: Establece la calidad del juego.\nParty: Crea una party para jugar con tus amig@s.\nSkin: Selecciona la skin que quieres utilizar.\nTeclas: Muestra la lista de las teclas con funciones.\nTexto1: Cambia el texto del botón Play.");
     } else if(cmd == "Calidad" || cmd == "calidad" || cmd == "CALIDAD")
     {
         var QualityPrompt = window.prompt("Calidad del juego: (Máximo 2.8)");

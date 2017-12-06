@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
 // @namespace    SuperhexIoScr1pt
-// @version      BETA_1.1
+// @version      1.1
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
 // @icon         http://superhex.io/img/fav_icon_1.png
 // @description  Script para Superhex.io
@@ -83,7 +83,7 @@ changeT1 = function()
 
 var scrText1 = document.createElement("h2");
 scrText1.setAttribute("style", "color: white; position: fixed; top: 50px; left: 30px;");
-scrText1.innerText = "Superhex.io Scr1pt vBETA 1.1";
+scrText1.innerText = "Superhex.io Scr1pt 1.1";
 document.getElementById("homepage").appendChild(scrText1);
 
 var btn = document.createElement("Button");

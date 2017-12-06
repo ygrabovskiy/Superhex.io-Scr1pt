@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
 // @namespace    SuperhexIoScr1pt
-// @version      BETA_1.0
+// @version      BETA_1.1
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
 // @icon         http://superhex.io/img/fav_icon_1.png
 // @description  Script para Superhex.io
@@ -83,35 +83,45 @@ changeT1 = function()
 
 var scrText1 = document.createElement("h2");
 scrText1.setAttribute("style", "color: white; position: fixed; top: 50px; left: 30px;");
-scrText1.innerText = "Superhex.io Scr1pt vBETA 1.0";
+scrText1.innerText = "Superhex.io Scr1pt vBETA 1.1";
 document.getElementById("homepage").appendChild(scrText1);
 
 var btn = document.createElement("Button");
-btn.setAttribute("style", "position: fixed; top: 110px; left: 30px;");
+btn.setAttribute("style", "position: fixed; top: 110px; left: 30px; height:20px; width:140px;");
+btn.setAttribute("class", "green");
+btn.setAttribute("type", "button");
 btn.innerText = "GitHub";
 btn.setAttribute("onclick", "goGitHub();");
 document.getElementById("homepage").appendChild(btn);
 
 var btn2 = document.createElement("Button");
-btn2.setAttribute("style", "position: fixed; top: 140px; left: 30px;");
+btn2.setAttribute("style", "position: fixed; top: 140px; left: 30px; height:20px; width:140px;");
+btn2.setAttribute("class", "green");
+btn2.setAttribute("type", "button");
 btn2.innerText = "Cambiar calidad";
 btn2.setAttribute("onclick", "changeQ();");
 document.getElementById("homepage").appendChild(btn2);
 
 var btn3 = document.createElement("Button");
-btn3.setAttribute("style", "position: fixed; top: 170px; left: 30px;");
+btn3.setAttribute("style", "position: fixed; top: 170px; left: 30px; height:20px; width:140px;");
+btn3.setAttribute("class", "green");
+btn3.setAttribute("type", "button");
 btn3.innerText = "Cambiar skin (BETA)";
 btn3.setAttribute("onclick", "changeS();");
 document.getElementById("homepage").appendChild(btn3);
 
 var btn4 = document.createElement("Button");
-btn4.setAttribute("style", "position: fixed; top: 200px; left: 30px;");
+btn4.setAttribute("style", "position: fixed; top: 200px; left: 30px; height:20px; width:140px;");
+btn4.setAttribute("class", "green");
+btn4.setAttribute("type", "button");
 btn4.innerText = "Teclas con funciones";
 btn4.setAttribute("onclick", "teclasAc()");
 document.getElementById("homepage").appendChild(btn4);
 
 var btn5 = document.createElement("Button");
-btn5.setAttribute("style", "position: fixed; top: 230px; left: 30px;");
+btn5.setAttribute("style", "position: fixed; top: 230px; left: 30px; height:20px; width:140px;");
+btn5.setAttribute("class", "green");
+btn5.setAttribute("type", "button");
 btn5.innerText = "Texto del botón Play";
 btn5.setAttribute("onclick", "changeT1()");
 document.getElementById("homepage").appendChild(btn5);

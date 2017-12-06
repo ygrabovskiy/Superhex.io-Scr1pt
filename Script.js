@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
-// @namespace    SuperhexIoScr1pt
+// @namespace    Superhex.io Scr1pt
 // @version      1.1
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
 // @icon         http://superhex.io/img/fav_icon_1.png

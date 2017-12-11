@@ -1,8 +1,9 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
 // @namespace    Superhex.io Scr1pt
-// @version      1.1
+// @version      1.2
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
+// @updateURL    https://github.com/Truebamateo/Superhex.io-Scr1pt/blob/master/Script.js
 // @icon         http://superhex.io/img/fav_icon_1.png
 // @description  Script para Superhex.io
 // @author       Truebamateo
@@ -12,19 +13,44 @@
 
 
 var Text1TBM = window.localStorage.getItem("Text1TBM");
+var AdsTBM = window.localStorage.getItem("AdsTBM");
+
+removeAds = function(checkBox)
+{
+   if(checkBox)
+   {
+     if(!Check1.checked) //Restore Ads
+     {
+         window.localStorage.removeItem("AdsTBM");
+         alert("Anuncios activados. Para que sean visibles, es necesario recargar la página.");
+       } else {
+    window.localStorage.setItem("AdsTBM", true);
+    superhex.clickPlay = superhex.aipComplete;
+    superhex.clickPlayAgain = superhex.aipComplete;
+    document.getElementById("google_ads_iframe_/421469808/TKS_superhex.io_300x250_0__container__").innerHTML = "Anuncio bloqueado por Superhex.io Scr1pt";
+    alert("Anuncios desactivados.");
+  }
+} else {
+      superhex.clickPlay = superhex.aipComplete;
+      superhex.clickPlayAgain = superhex.aipComplete;
+      setTimeout(function(){
+        Check1.checked = true;
+      },150);
+      setTimeout(function(){
+        document.getElementById("google_ads_iframe_/421469808/TKS_superhex.io_300x250_0__container__").innerHTML = "Anuncio bloqueado por Superhex.io Scr1pt";
+      },1500);
+   }
+};
 
 if(Text1TBM)
    {
     document.getElementById("button-play-text").innerText = Text1TBM;
    }
 
-document.onkeydown = function(e){
-    e = e || window.event;
-    var key = e.which || e.keyCode;
-    if(key===187){
-        superhex.aipComplete();
-    }
-};
+if(AdsTBM)
+{
+  removeAds(false);
+}
 
 goGitHub = function()
 {
@@ -63,11 +89,6 @@ changeS = function()
     }
 };
 
-teclasAc = function()
-{
-    alert("Teclas con funciones:\n+ (*) : Inicia el juego sin el anuncio.");
-};
-
 changeT1 = function()
 {
   var Text1Prompt = window.prompt("Texto del botón Play:");
@@ -83,7 +104,7 @@ changeT1 = function()
 
 var scrText1 = document.createElement("h2");
 scrText1.setAttribute("style", "color: white; position: fixed; top: 50px; left: 30px;");
-scrText1.innerText = "Superhex.io Scr1pt 1.1";
+scrText1.innerText = "Superhex.io Scr1pt 1.2";
 document.getElementById("homepage").appendChild(scrText1);
 
 var btn = document.createElement("Button");
@@ -110,18 +131,22 @@ btn3.innerText = "Cambiar skin (BETA)";
 btn3.setAttribute("onclick", "changeS();");
 document.getElementById("homepage").appendChild(btn3);
 
-var btn4 = document.createElement("Button");
-btn4.setAttribute("style", "position: fixed; top: 200px; left: 30px; height:20px; width:140px;");
-btn4.setAttribute("class", "green");
-btn4.setAttribute("type", "button");
-btn4.innerText = "Teclas con funciones";
-btn4.setAttribute("onclick", "teclasAc()");
-document.getElementById("homepage").appendChild(btn4);
-
 var btn5 = document.createElement("Button");
-btn5.setAttribute("style", "position: fixed; top: 230px; left: 30px; height:20px; width:140px;");
+btn5.setAttribute("style", "position: fixed; top: 200px; left: 30px; height:20px; width:140px;");
 btn5.setAttribute("class", "green");
 btn5.setAttribute("type", "button");
 btn5.innerText = "Texto del botón Play";
 btn5.setAttribute("onclick", "changeT1()");
 document.getElementById("homepage").appendChild(btn5);
+
+var Check1 = document.createElement("INPUT");
+Check1.setAttribute("type", "checkbox");
+Check1.setAttribute("id", "checkAdBlock");
+Check1.setAttribute("style", "position: fixed; top: 230px; left: 30px;");
+Check1.setAttribute("onclick", "removeAds(true)");
+document.getElementById("homepage").appendChild(Check1);
+
+var check1Text = document.createElement("h5");
+check1Text.setAttribute("style", "color: white; position: fixed; top: 210px; left: 50px;");
+check1Text.innerText = "Desactivar anuncios (BETA)";
+document.getElementById("homepage").appendChild(check1Text);

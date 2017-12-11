@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
 // @namespace    Superhex.io Scr1pt
-// @version      1.2
+// @version      1.2.1
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
 // @updateURL    https://github.com/Truebamateo/Superhex.io-Scr1pt/blob/master/Script.js
 // @icon         http://superhex.io/img/fav_icon_1.png
@@ -12,22 +12,24 @@
 // ==/UserScript==
 
 
-var Text1TBM = window.localStorage.getItem("Text1TBM");
-var AdsTBM = window.localStorage.getItem("AdsTBM");
-
+var Text1TBM = localStorage.getItem("Text1TBM");
+var AdsTBM = localStorage.getItem("AdsTBM");
 removeAds = function(checkBox)
 {
    if(checkBox)
    {
      if(!Check1.checked) //Restore Ads
      {
-         window.localStorage.removeItem("AdsTBM");
+         localStorage.removeItem("AdsTBM");
          alert("Anuncios activados. Para que sean visibles, es necesario recargar la página.");
        } else {
-    window.localStorage.setItem("AdsTBM", true);
+    localStorage.setItem("AdsTBM", true);
     superhex.clickPlay = superhex.aipComplete;
     superhex.clickPlayAgain = superhex.aipComplete;
-    document.getElementById("google_ads_iframe_/421469808/TKS_superhex.io_300x250_0__container__").innerHTML = "Anuncio bloqueado por Superhex.io Scr1pt";
+    document.getElementById("div-gpt-ad-1490263292583-0").innerHTML = "Anuncio bloqueado por Superhex.io Scr1pt";
+    document.getElementById("div-gpt-ad-1490263292583-0").setAttribute("id", "adBlockedTBM"); //data-google-query-id
+    document.getElementById("adBlockedTBM").setAttribute("data-google-query-id", "null");
+    document.getElementById("cdm-zone-01").innerHTML = "Anuncio bloqueado por Superhex.io Scr1pt";
     alert("Anuncios desactivados.");
   }
 } else {
@@ -37,8 +39,11 @@ removeAds = function(checkBox)
         Check1.checked = true;
       },150);
       setTimeout(function(){
-        document.getElementById("google_ads_iframe_/421469808/TKS_superhex.io_300x250_0__container__").innerHTML = "Anuncio bloqueado por Superhex.io Scr1pt";
-      },1500);
+        document.getElementById("div-gpt-ad-1490263292583-0").innerHTML = "Anuncio bloqueado por Superhex.io Scr1pt";
+        document.getElementById("div-gpt-ad-1490263292583-0").setAttribute("id", "adBlockedTBM");
+        document.getElementById("adBlockedTBM").setAttribute("data-google-query-id", "null");
+        document.getElementById("cdm-zone-01").innerHTML = "Anuncio bloqueado por Superhex.io Scr1pt";
+      },1350);
    }
 };
 
@@ -97,14 +102,29 @@ changeT1 = function()
         alert("Texto del botón Play no cambiado.");
     } else {
         document.getElementById("button-play-text").innerText = Text1Prompt;
-        window.localStorage.setItem("Text1TBM", Text1Prompt);
+        localStorage.setItem("Text1TBM", Text1Prompt);
         alert("Texto del botón Play cambiado a: " + Text1Prompt);
     }
 };
 
+unlockSK = function()
+{
+  if(localStorage.getItem("shareClicked") && localStorage.getItem("subscribeClicked") && localStorage.getItem("likeClicked") && localStorage.getItem("tweetClicked") && localStorage.getItem("followClicked"))
+  {
+    alert("Ya tienes los skins desbloqueados.");
+  } else {
+    localStorage.setItem("shareClicked", 1);
+    localStorage.setItem("subscribeClicked", 1);
+    localStorage.setItem("likeClicked", 1);
+    localStorage.setItem("tweetClicked", 1);
+    localStorage.setItem("followClicked", 1);
+    alert("Los siguientes skins fueron desbloqueados: (Puede que algunos ya los hallas desbloqueado anteriormente.)\nPollito amarillo.\nAve celeste.\nVaca.\nAve roja.\nElefante.");
+  }
+};
+
 var scrText1 = document.createElement("h2");
 scrText1.setAttribute("style", "color: white; position: fixed; top: 50px; left: 30px;");
-scrText1.innerText = "Superhex.io Scr1pt 1.2";
+scrText1.innerText = "Superhex.io Scr1pt 1.2.1";
 document.getElementById("homepage").appendChild(scrText1);
 
 var btn = document.createElement("Button");
@@ -150,3 +170,11 @@ var check1Text = document.createElement("h5");
 check1Text.setAttribute("style", "color: white; position: fixed; top: 210px; left: 50px;");
 check1Text.innerText = "Desactivar anuncios (BETA)";
 document.getElementById("homepage").appendChild(check1Text);
+
+var btn6 = document.createElement("Button");
+btn6.setAttribute("style", "position: fixed; top: 255px; left: 30px; height:20px; width:140px;");
+btn6.setAttribute("class", "green");
+btn6.setAttribute("type", "button");
+btn6.innerText = "Desbloquear skins";
+btn6.setAttribute("onclick", "unlockSK()");
+document.getElementById("homepage").appendChild(btn6);

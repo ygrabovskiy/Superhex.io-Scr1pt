@@ -2,5 +2,5 @@ Este script tiene las siguientes características:
 * Interfaz con botones. Tienen la apariencia de los botones de Superhex.io
 * Control de calidad del juego. (Se puede cambiar la calidad del juego a cualquier valor)
 * Cambiador de skin por IDS. (BETA)
-* Tecla + (*) la cual inicia el juego sin anuncios. (Tecla no personalizable de momento)
 * Cambiador del texto del botón Play (Jugar).
+* Opción para desactivar/activar los anuncios. (BETA) (Algunos anuncios no se desactivan debido a problemas)

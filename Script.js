@@ -3,7 +3,6 @@
 // @namespace    Superhex.io Scr1pt
 // @version      1.2.1
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
-// @updateURL    https://github.com/Truebamateo/Superhex.io-Scr1pt/blob/master/Script.js
 // @icon         http://superhex.io/img/fav_icon_1.png
 // @description  Script para Superhex.io
 // @author       Truebamateo

@@ -1,3 +1,4 @@
+#Superhex.io Scr1pt
 <b>This script has the following features:</b>
 * Interface with buttons. They have the appearance of Superhex.io buttons.
 * Quality control of the game. (You can change the quality of the game to any value)

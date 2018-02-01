@@ -1,21 +1,70 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
 // @namespace    Superhex.io Scr1pt
-// @version      1.2.3
+// @version      1.3
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
 // @icon         http://superhex.io/img/fav_icon_1.png
-// @description  Script para Superhex.io
+// @description  Script for Superhex.io
+// @description:es-ES Script para Superhex.io
 // @author       Truebamateo
 // @match        http://superhex.io/*
 // @grant        none
 // ==/UserScript==
 
+storageAvailable = function(type){
+	try{
+		var storage = window[type],
+			x = '__storage_test__';
+		storage.setItem(x, x);
+		storage.removeItem(x);
+		return true;
+	}
+	catch(e){
+		return false;
+	}
+};
 
+var currSkin = 0;
+if(storageAvailable('localStorage'))
+{
 var Text1TBM = localStorage.getItem("Text1TBM");
 var AdsTBM = localStorage.getItem("AdsTBM");
+var Language = localStorage.getItem("LangTBM");
+currSkin = localStorage.getItem("selectedSkin");
+} else {console.warn("WARNING: Your browser doesn't support localStorage.");}
 var adsDeleted = false;
 var skinPag = 1;
-//var currSkin = 0;
+var adsRestoredTxt = "Ads restored. The changes will take effect when the page is reloaded.";
+var adBlockedTxt = "Ad blocked by Superhex.io Scr1pt";
+var adsRemovedTxt = "Ads removed.";
+var qChangeTxt = "Quality:\n0.5: Low\n0.75: Medium\n1: High";
+var q27Txt = "WARNING: Setting the quality higher than 2.7 may cause problems.";
+var q01Txt = "WARNING: Setting the quality lower than 0.1 may cause problems.";
+var qInvalidTxt = "Invalid quality. You can only insert numbers.\nExample: 1.2";
+var qNotChangedTxt = "Quality not changed.";
+var qChangedTxt = "Quality changed to: ";
+var sChangeTxt = "Skin ID:\nNote: To set the Skin 0 should use 0.1";
+var sInvalidTxt = "Skin ID invalid. You can only insert numbers.";
+var s0Txt = "Skin changed to: 0";
+var sNotChangedTxt = "Skin not changed.";
+var sChangedTxt = "Skin changed to: ";
+var sErrorTxt = "An error has occurred. Make sure to insert a valid ID.";
+var sTheSTxt = "The skin ";
+var sNoExist = " doesn't exist. Enter a number less than 10.";
+var localStorageTxt = "Your browser doesn't support localStorage, therefore, you can't use this function.";
+var pTextTxt = "Play button text:";
+var pTextNotChangedTxt = "Play button text not changed.";
+var pTextChangedTxt = "Play button text changed to: ";
+var sUnlockekdTxt = "You already have the skins unlocked.";
+var sUnlockedsTxt = "The following skins were unlocked:";
+var sChickenTxt = "Yellow chicken.";
+var sBirdTxt = "Light blue bird.";
+var sCowTxt = "Cow.";
+var sBird2Txt = "Red bird.";
+var sElephantTxt = "Elephant.";
+var loadingScriptTxt = "Loading Superhex.io Scr1pt...";
+var sAlreadyTxt = "You already have the skin ";
+var sAlreadyTxt2 = "";
 
 window.onload = function ()
 {
@@ -24,6 +73,60 @@ window.onload = function ()
   var skinLeftArrow = document.getElementById("skin-left-arrow");
   skinRightArrow.setAttribute("onclick", "skinChangePage(true, 1)");
   skinLeftArrow.setAttribute("onclick", "skinChangePage(false, 1)");
+	if(storageAvailable('localStorage') && Language == "ES") changeLang(false, false);
+};
+
+changeLang = function(write, ing)
+{
+  if(ing) {
+    if(storageAvailable('localStorage')) localStorage.setItem('LangTBM', 'EN');
+    alert("Language changed to English. The changes will take effect when the page is reloaded.");
+		document.getElementById("btn7").innerText = "Español (Spanish)";
+		document.getElementById("btn7").setAttribute("onclick", "changeLang(true, false);");
+  } else {
+		loadingScriptTxt = "Cargando Superhex.io Scr1pt...";
+    adsRestoredTxt = "Anuncios activados. Para que sean visibles, es necesario recargar la página.";
+    adBlockedTxt = "Anuncio bloqueado por Superhex.io Scr1pt";
+    adsRemovedTxt = "Anuncios desactivados.";
+    qChangeTxt = "Calidad:\n0.5: Low (Baja)\n0.75: Medium (Media)\n1: High (Alta)";
+    q27Txt = "ADVERTENCIA: Establecer la calidad mayor a 2.7 puede causar problemas.";
+    q01Txt = "ADVERTENCIA: Establecer la calidad menor a 0.1 puede causar problemas.";
+    qInvalidTxt = "Calidad inválida. Solo puedes insertar números.\nEjemplo: 1.2";
+    qNotChangedTxt = "Calidad no cambiada.";
+    qChangedTxt = "Calidad cambiada a: ";
+    sChangeTxt = "ID de la Skin:\nNota: Para establecer la skin 0 se debe utilizar 0.1";
+    sInvalidTxt = "ID de la skin inválido. Solo puedes insertar números.";
+    s0Txt = "Skin cambiada a: 0";
+    sNotChangedTxt = "Skin no cambiada.";
+    sChangedTxt = "Skin cambiada a: ";
+    sErrorTxt = "Se ha producido un error. Asegúrate de insertar un ID válido.";
+    sTheSTxt = "La skin ";
+    sNoExist = " no existe. Introduzca un número menor a 10.";
+    localStorageTxt = "Tu navegador no soporta localStorage, por lo tanto, no puedes utilizar esta función.";
+		pTextTxt = "Texto del botón Play:";
+		pTextNotChangedTxt = "Texto del botón Play no cambiado.";
+		pTextChangedTxt = "Texto del botón Play cambiado a: ";
+		sUnlockekdTxt = "Ya tienes los skins desbloqueados.";
+		sUnlockedsTxt = "Los siguientes skins fueron desbloqueados:";
+		sChickenTxt = "Pollo amarillo.";
+		sBirdTxt = "Ave celeste.";
+		sCowTxt = "Vaca.";
+		sBird2Txt = "Ave roja.";
+		sElephantTxt = "Elefante.";
+		sAlreadyTxt = "Ya tienes el skin ";
+		sAlreadyTxt2 = " puesto.";
+		document.getElementById("btn2").innerText = "Cambiar calidad";
+		document.getElementById("btn3").innerText = "Establecer Skin (ID)";
+		document.getElementById("btn5").innerText = "Texto del botón Play";
+		document.getElementById("check1Text").innerText = "Desactivar anuncios";
+		document.getElementById("btn6").innerText = "Desbloquear skins";
+		document.getElementById("btn7").innerText = "English (Inglés)";
+		document.getElementById("btn7").setAttribute("onclick", "changeLang(false, true);");
+    if(write) {
+   if(storageAvailable('localStorage')) localStorage.setItem('LangTBM', 'ES');
+   alert("Idioma cambiado a Español.");
+   }
+  }
 };
 
 skinChangePage = function(next, cantidad)
@@ -59,10 +162,13 @@ skinChangePage = function(next, cantidad)
   }
 };
 
-/*changeSkin = function(ID)
-{                               COMING SOON - PRÓXIMAMENTE
-
-}; */
+changeSkin = function(ID)
+{
+	 if(currSkin != ID) {
+	 superhex.selectSkin(ID);
+	 alert(sChangedTxt + ID);
+   currSkin = ID; } else {alert(sAlreadyTxt + ID + sAlreadyTxt2);}
+};
 
 removeAds = function(checkBox)
 {
@@ -70,40 +176,43 @@ removeAds = function(checkBox)
    {
      if(!document.getElementById("checkAdBlock").checked) //Restore Ads
      {
-         localStorage.removeItem("AdsTBM");
+         if(storageAvailable('localStorage')) localStorage.removeItem("AdsTBM");
          adsDeleted = true;
-         alert("Anuncios activados. Para que sean visibles, es necesario recargar la página.");
+         alert(adsRestoredTxt);
        } else {
-    localStorage.setItem("AdsTBM", true);
+    if(storageAvailable('localStorage')) localStorage.setItem("AdsTBM", true);
     superhex.clickPlay = superhex.aipComplete;
     superhex.clickPlayAgain = superhex.aipComplete;
     if(!adsDeleted) {
     var Ad14 = document.getElementById("div-gpt-ad-1490263292583-0");
-    Ad14.innerHTML = "Anuncio bloqueado por Superhex.io Scr1pt";
+    Ad14.innerHTML = adBlockedTxt;
     Ad14.setAttribute("id", "adBlockedTBM");
     Ad14 = document.getElementById("adBlockedTBM");
     Ad14.setAttribute("data-google-query-id", "null");
-    document.getElementById("cdm-zone-01").innerHTML = "Anuncio bloqueado por Superhex.io Scr1pt";
+    document.getElementById("cdm-zone-01").innerHTML = adBlockedTxt;
   }
-    alert("Anuncios desactivados.");
+    alert(adsRemovedTxt);
   }
 } else {
       superhex.clickPlay = superhex.aipComplete;
       superhex.clickPlayAgain = superhex.aipComplete;
       setTimeout(function(){
         var Ad14 = document.getElementById("div-gpt-ad-1490263292583-0");
-        Ad14.innerHTML = "Anuncio bloqueado por Superhex.io Scr1pt";
+        Ad14.innerHTML = adBlockedTxt;
         Ad14.setAttribute("id", "adBlockedTBM");
         Ad14 = document.getElementById("adBlockedTBM");
         Ad14.setAttribute("data-google-query-id", "null");
-        document.getElementById("cdm-zone-01").innerHTML = "Anuncio bloqueado por Superhex.io Scr1pt";
+        document.getElementById("cdm-zone-01").innerHTML = adBlockedTxt;
       },1350);
    }
 };
 
+if(storageAvailable('localStorage')) {
+
 if(Text1TBM) document.getElementById("button-play-text").innerText = Text1TBM;
 
 if(AdsTBM) removeAds(false);
+}
 
 goGitHub = function()
 {
@@ -112,24 +221,24 @@ goGitHub = function()
 
 changeQ = function()
 {
-    var QualityPrompt = window.prompt("Calidad del juego:\n0.5: Low (Baja)\n0.75: Medium (Media)\n1: High (Alta)");
+    var QualityPrompt = window.prompt(qChangeTxt);
     QualityPrompt = Number(QualityPrompt);
-    if(QualityPrompt > 2.7)alert("ADVERTENCIA: Establecer la calidad mayor a 2.7 puede causar problemas");
-    if(QualityPrompt < 0.1 && QualityPrompt > 0)alert("ADVERTENCIA: Establecer la calidad menor a 0.1 puede causar problemas");
+    if(QualityPrompt > 2.7) alert(q27Txt);
+    if(QualityPrompt < 0.1 && QualityPrompt > 0) alert(q01Txt);
     if(QualityPrompt.toString() == "NaN")
     {
-        alert("Calidad inválida. Solo puedes insertar números.\nEjemplo: 1.2");
+        alert(qInvalidTxt);
     } else if(QualityPrompt === 0) {
-        alert("Calidad no cambiada.");
+        alert(qNotChangedTxt);
     } else {
         superhex.setQuality(QualityPrompt);
-        alert("Calidad cambiada a: " + QualityPrompt);
+        alert(qChangedTxt + QualityPrompt);
     }
 };
 
 changeS = function()
 {
-    var SkinPrompt = window.prompt("ID de la Skin:\nNota: Para establecer la skin 0 se debe utilizar 0.1");
+    var SkinPrompt = window.prompt(sChangeTxt);
     SkinPrompt = Number(SkinPrompt);
     superhex.nextSkins();
     superhex.previousSkins();
@@ -138,6 +247,8 @@ changeS = function()
     var CowS2 = false;
     var RedBirdS2 = false;
     var ElephantS2 = false;
+    if(storageAvailable('localStorage')) {
+		currSkin = localStorage.getItem("selectedSkin");
     if(localStorage.getItem("followClicked")) ChickenS2 = true;
     if(localStorage.getItem("tweetClicked")) TweetS2 = true;
     if(localStorage.getItem("likeClicked")) CowS2 = true;
@@ -145,44 +256,39 @@ changeS = function()
     if(localStorage.getItem("shareClicked")) ElephantS2 = true;
     if(SkinPrompt.toString() == "NaN")
     {
-        alert("ID de la skin no válido. Solo puedes insertar números.");
+        alert(sInvalidTxt);
     } else if(SkinPrompt == 0.1) {
         if(skinPag == 2) skinChangePage(false, 1);
         if(skinPag == 3) skinChangePage(false, 2);
         if(!ChickenS2) localStorage.setItem("followClicked", 1);
-        superhex.selectSkin(0);
+        changeSkin(0);
         if(!ChickenS2) localStorage.removeItem("followClicked");
-        alert("Skin cambiada a: 0");
     } else if(SkinPrompt === 0) {
-        alert("Skin no cambiada.");
+        alert(sNotChangedTxt);
     } else {
         if(SkinPrompt == 1) {
            if(skinPag == 2) skinChangePage(false, 1);
            if(skinPag == 3) skinChangePage(false, 2);
            if(!TweetS2) localStorage.setItem("tweetClicked", 1);
-           superhex.selectSkin(SkinPrompt);
-           alert("Skin cambiada a: " + SkinPrompt);
+           changeSkin(SkinPrompt);
            if(!TweetS2) localStorage.removeItem("tweetClicked");
         } else if(SkinPrompt == 2) {
            if(skinPag == 2) skinChangePage(false, 1);
            if(skinPag == 3) skinChangePage(false, 2);
            if(!CowS2) localStorage.setItem("likeClicked", 1);
-           superhex.selectSkin(SkinPrompt);
-           alert("Skin cambiada a: " + SkinPrompt);
+           changeSkin(SkinPrompt);
            if(!CowS2) localStorage.removeItem("likeClicked");
         } else if(SkinPrompt == 3) {
            if(skinPag == 2) skinChangePage(false, 1);
            if(skinPag == 3) skinChangePage(false, 2);
            if(!RedBirdS2) localStorage.setItem("subscribeClicked", 1);
-           superhex.selectSkin(SkinPrompt);
-           alert("Skin cambiada a: " + SkinPrompt);
+           changeSkin(SkinPrompt);
            if(!RedBirdS2) localStorage.removeItem("subscribeClicked");
         } else if(SkinPrompt == 4) {
            if(skinPag == 1) skinChangePage(true, 1);
            if(skinPag == 3) skinChangePage(false, 1);
            if(!ElephantS2) localStorage.setItem("shareClicked", 1);
-           superhex.selectSkin(SkinPrompt);
-           alert("Skin cambiada a: " + SkinPrompt);
+           changeSkin(SkinPrompt);
            if(!ElephantS2) localStorage.removeItem("shareClicked");
         } else {
           if(SkinPrompt <= 9) {
@@ -191,36 +297,38 @@ changeS = function()
            if(SkinPrompt >= 8 && skinPag == 2) skinChangePage(true, 1);
            if(SkinPrompt >= 4 && SkinPrompt < 8 && skinPag == 1) skinChangePage(true, 1);
            if(SkinPrompt >= 4 && SkinPrompt < 8 && skinPag == 3) skinChangePage(false, 1);
-           superhex.selectSkin(SkinPrompt);
-           alert("Skin cambiada a: " + SkinPrompt);
+           changeSkin(SkinPrompt);
           } catch(err) {
-            alert("Se ha producido un error. Asegúrate de insertar un ID válido.");
+						console.error("Superhex.io Scr1pt error changing skin by ID: " + err);
+            alert(sErrorTxt);
           }
           } else {
-            alert("La skin " + SkinPrompt + " no existe. Introduzca un número menor a 10.");
+            alert(sTheSTxt + SkinPrompt + sNoExist);
           }
         }
     }
+  } else {alert(localStorageTxt);}
 };
 
 changeT1 = function()
 {
-  var Text1Prompt = window.prompt("Texto del botón Play:");
+  var Text1Prompt = window.prompt(pTextTxt);
   if(Text1Prompt === null)
     {
-        alert("Texto del botón Play no cambiado.");
+        alert(pTextNotChangedTxt);
     } else {
         document.getElementById("button-play-text").innerText = Text1Prompt;
-        localStorage.setItem("Text1TBM", Text1Prompt);
-        alert("Texto del botón Play cambiado a: " + Text1Prompt);
+        if(storageAvailable('localStorage')) localStorage.setItem("Text1TBM", Text1Prompt);
+        alert(pTextChangedTxt + Text1Prompt);
     }
 };
 
 unlockSK = function()
 {
+  if(storageAvailable('localStorage')) {
   if(localStorage.getItem("shareClicked") && localStorage.getItem("subscribeClicked") && localStorage.getItem("likeClicked") && localStorage.getItem("tweetClicked") && localStorage.getItem("followClicked"))
   {
-    alert("Ya tienes los skins desbloqueados.");
+    alert(sUnlockekdTxt);
   } else {
     var ChickenS = true;
     var TweetS = true;
@@ -239,28 +347,30 @@ unlockSK = function()
     localStorage.setItem("followClicked", 1);
     superhex.nextSkins();
     superhex.previousSkins();
-    alert("Los siguientes skins fueron desbloqueados:");
-    if(ChickenS) alert("Pollo amarillo.");
-    if(TweetS) alert("Ave celeste.");
-    if(CowS) alert("Vaca.");
-    if(RedBirdS) alert("Ave roja.");
-    if(ElephantS) alert("Elefante.");
+    alert(sUnlockedsTxt);
+    if(ChickenS) alert(sChickenTxt);
+    if(TweetS) alert(sBirdTxt);
+    if(CowS) alert(sCowTxt);
+    if(RedBirdS) alert(sBird2Txt);
+    if(ElephantS) alert(sElephantTxt);
   }
+} else {alert(localStorageTxt);}
 };
 
 var scrText1 = document.createElement("h2");
 scrText1.setAttribute("style", "color: white; position: fixed; top: 50px; left: 30px;");
-scrText1.innerText = "Cargando Superhex.io Scr1pt...";
+scrText1.innerText = loadingScriptTxt;
 document.getElementById("homepage").appendChild(scrText1);
 
 mkGui = function() {
 
-scrText1.innerText = "Superhex.io Scr1pt v1.2.3";
+scrText1.innerText = "Superhex.io Scr1pt v1.3";
 
 var btn = document.createElement("Button");
 btn.setAttribute("style", "position: fixed; top: 110px; left: 30px; height:20px; width:140px;");
 btn.setAttribute("class", "green");
 btn.setAttribute("type", "button");
+btn.setAttribute("id", "btn");
 btn.innerText = "GitHub";
 btn.setAttribute("onclick", "goGitHub();");
 document.getElementById("homepage").appendChild(btn);
@@ -269,7 +379,8 @@ var btn2 = document.createElement("Button");
 btn2.setAttribute("style", "position: fixed; top: 140px; left: 30px; height:20px; width:140px;");
 btn2.setAttribute("class", "green");
 btn2.setAttribute("type", "button");
-btn2.innerText = "Cambiar calidad";
+btn2.setAttribute("id", "btn2");
+btn2.innerText = "Change quality";
 btn2.setAttribute("onclick", "changeQ();");
 document.getElementById("homepage").appendChild(btn2);
 
@@ -277,7 +388,8 @@ var btn3 = document.createElement("Button");
 btn3.setAttribute("style", "position: fixed; top: 170px; left: 30px; height:20px; width:140px;");
 btn3.setAttribute("class", "green");
 btn3.setAttribute("type", "button");
-btn3.innerText = "Establecer Skin (ID)";
+btn3.setAttribute("id", "btn3");
+btn3.innerText = "Set Skin (ID)";
 btn3.setAttribute("onclick", "changeS();");
 document.getElementById("homepage").appendChild(btn3);
 
@@ -285,29 +397,41 @@ var btn5 = document.createElement("Button");
 btn5.setAttribute("style", "position: fixed; top: 200px; left: 30px; height:20px; width:140px;");
 btn5.setAttribute("class", "green");
 btn5.setAttribute("type", "button");
-btn5.innerText = "Texto del botón Play";
-btn5.setAttribute("onclick", "changeT1()");
+btn5.setAttribute("id", "btn5");
+btn5.innerText = "Set Play button text";
+btn5.setAttribute("onclick", "changeT1();");
 document.getElementById("homepage").appendChild(btn5);
 
 var Check1 = document.createElement("INPUT");
 Check1.setAttribute("type", "checkbox");
 Check1.setAttribute("id", "checkAdBlock");
 Check1.setAttribute("style", "position: fixed; top: 230px; left: 30px;");
-Check1.setAttribute("onclick", "removeAds(true)");
+Check1.setAttribute("onclick", "removeAds(true);");
 document.getElementById("homepage").appendChild(Check1);
 
 if(AdsTBM) Check1.checked = true;
 
 var check1Text = document.createElement("h5");
 check1Text.setAttribute("style", "color: white; position: fixed; top: 210px; left: 50px;");
-check1Text.innerText = "Desactivar anuncios";
+check1Text.setAttribute("id", "check1Text");
+check1Text.innerText = "Remove ads";
 document.getElementById("homepage").appendChild(check1Text);
 
 var btn6 = document.createElement("Button");
 btn6.setAttribute("style", "position: fixed; top: 255px; left: 30px; height:20px; width:140px;");
 btn6.setAttribute("class", "green");
 btn6.setAttribute("type", "button");
-btn6.innerText = "Desbloquear skins";
-btn6.setAttribute("onclick", "unlockSK()");
+btn6.setAttribute("id", "btn6");
+btn6.innerText = "Unlock skins";
+btn6.setAttribute("onclick", "unlockSK();");
 document.getElementById("homepage").appendChild(btn6);
+
+var btn7 = document.createElement("Button");
+btn7.setAttribute("style", "position: fixed; top: 285px; left: 30px; height:20px; width:140px;");
+btn7.setAttribute("class", "green");
+btn7.setAttribute("type", "button");
+btn7.setAttribute("id", "btn7");
+btn7.innerText = "Español (Spanish)";
+btn7.setAttribute("onclick", "changeLang(true, false);");
+document.getElementById("homepage").appendChild(btn7);
 };

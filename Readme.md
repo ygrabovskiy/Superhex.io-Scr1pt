@@ -6,7 +6,10 @@
 * Play button text changer.
 * Ads control. (They can be activated or deactivated).
 * Skins unlocker: Unlock the skins that they give you if you subscribe, you give a like, etc.
-
+* Function that hides/shows the UI when pressing 0 (zero).
+* Function that hides/shows the Leaderboard when pressing 1 (one).
+* Function that shows/hides FPS and other data when pressing 2 (two).
+* Available in English and Spanish.
 
 <b>Este script tiene las siguientes características:</b>
 * Interfaz con botones. Tienen la apariencia de los botones de Superhex.io
@@ -15,3 +18,7 @@
 * Cambiador del texto del botón Play (Jugar).
 * Control de anuncios. (Pueden activarse o desactivarse)
 * Desbloqueador de skins: Desbloquea las skins que te dan si te suscribes, das me gusta, etc.
+* Función que oculta/muestra la UI cuando se presiona 0 (cero).
+* Función que oculta/muestra la Tabla de clasificación cuando se presiona 1 (uno).
+* Función que muestra/oculta los FPS y otros datos cuando se presiona 2 (dos).
+* Disponible en Inglés y Español.

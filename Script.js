@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
 // @namespace    Superhex.io Scr1pt
-// @version      1.3
+// @version      1.4
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
 // @icon         http://superhex.io/img/fav_icon_1.png
 // @description  Script for Superhex.io
@@ -10,7 +10,6 @@
 // @match        http://superhex.io/*
 // @grant        none
 // ==/UserScript==
-
 storageAvailable = function(type){
 	try{
 		var storage = window[type],
@@ -64,7 +63,8 @@ var sBird2Txt = "Red bird.";
 var sElephantTxt = "Elephant.";
 var loadingScriptTxt = "Loading Superhex.io Scr1pt...";
 var sAlreadyTxt = "You already have the skin ";
-var sAlreadyTxt2 = "";
+var sAlreadyTxt2 = ""; //Dejar vacio
+var keyActionsTxt = "Keys:\n\n1 = Hide/show Leaderboard.\n0 = Hide/show UI.\n2 = Show/hide FPS and other data.";
 
 window.onload = function ()
 {
@@ -115,6 +115,7 @@ changeLang = function(write, ing)
 		sElephantTxt = "Elefante.";
 		sAlreadyTxt = "Ya tienes el skin ";
 		sAlreadyTxt2 = " puesto.";
+		keyActionsTxt = "Teclas:\n\n1 = Oculta/muestra la Tabla de clasificación.\n0 = Oculta/muestra la UI.\n2 = Muestra/oculta los FPS y otros datos.";
 		document.getElementById("btn2").innerText = "Cambiar calidad";
 		document.getElementById("btn3").innerText = "Establecer Skin (ID)";
 		document.getElementById("btn5").innerText = "Texto del botón Play";
@@ -122,6 +123,7 @@ changeLang = function(write, ing)
 		document.getElementById("btn6").innerText = "Desbloquear skins";
 		document.getElementById("btn7").innerText = "English (Inglés)";
 		document.getElementById("btn7").setAttribute("onclick", "changeLang(false, true);");
+		document.getElementById("scrText2").innerText = keyActionsTxt;
     if(write) {
    if(storageAvailable('localStorage')) localStorage.setItem('LangTBM', 'ES');
    alert("Idioma cambiado a Español.");
@@ -164,10 +166,25 @@ skinChangePage = function(next, cantidad)
 
 changeSkin = function(ID)
 {
+	 var canChangeS = true;
 	 if(currSkin != ID) {
+	 if(ID <= 3) {
+     if(skinPag == 2) {skinChangePage(false, 1);} else if(skinPag == 3) {skinChangePage(false, 2);}
+	 } else if(ID <= 7) {
+		 if(skinPag == 1) {skinChangePage(true, 1);} else if(skinPag == 3) {skinChangePage(false, 1);}
+	 } else if(ID <= 9) {
+		 if(skinPag == 2) {skinChangePage(true, 1);} else if(skinPag == 1) {skinChangePage(true, 2);}
+	 } else {
+		 alert(sTheSTxt + ID + sNoExist);
+		 canChangeS = false;
+	 }
+	 if(canChangeS == true)
+	 {
 	 superhex.selectSkin(ID);
+	 currSkin = ID;
 	 alert(sChangedTxt + ID);
-   currSkin = ID; } else {alert(sAlreadyTxt + ID + sAlreadyTxt2);}
+   }
+ } else {alert(sAlreadyTxt + ID + sAlreadyTxt2);}
 };
 
 removeAds = function(checkBox)
@@ -214,6 +231,34 @@ if(Text1TBM) document.getElementById("button-play-text").innerText = Text1TBM;
 if(AdsTBM) removeAds(false);
 }
 
+document.onkeydown = function(e) {
+	   try {
+     e = e || window.event;
+     var key = e.which || e.keyCode;
+     if(key===49 && document.getElementById("leaderboard").getAttribute("style") != null) {
+       if(document.getElementById("leaderboard").getAttribute("style") == "display: block;") {
+				 document.getElementById("leaderboard").setAttribute("style", "display: none;");
+			 } else {document.getElementById("leaderboard").setAttribute("style", "display: block;");}
+     }
+		 if(key===48 && document.getElementById("leaderboard").getAttribute("style") != null) {
+      if(document.getElementById("leaderboard").getAttribute("style") == "display: block;") document.getElementById("leaderboard").setAttribute("style", "display: none;");
+			if(document.getElementById("minimap").getAttribute("style") == "display: block;") document.getElementById("minimap").setAttribute("style", "display: none;");
+			if(document.getElementById("friendsScores").getAttribute("style") == "display: block;") document.getElementById("friendsScores").setAttribute("style", "display: none;");
+			if(document.getElementById("score").getAttribute("style") == "display: block;") {document.getElementById("score").setAttribute("style", "display: none;");} else {
+				document.getElementById("score").setAttribute("style", "display: block;");
+				document.getElementById("minimap").setAttribute("style", "display: block;");
+				document.getElementById("leaderboard").setAttribute("style", "display: block;");
+				if(window.location.hash != "") document.getElementById("friendsScores").setAttribute("style", "display: block;");
+			}
+		 }
+		 if(key===50) {
+			 if(document.getElementById("fps").getAttribute("style") == "display: block; color: white;") {document.getElementById("fps").setAttribute("style", "display: none;");} else {document.getElementById("fps").setAttribute("style", "display: block; color: white;");}
+		 }
+	 } catch(err) {
+		 console.error("Superhex.io Scr1pt Error onkeydown: " + err);
+	 }
+ };
+
 goGitHub = function()
 {
   window.open("https://github.com/Truebamateo/Superhex.io-Scr1pt");
@@ -258,8 +303,6 @@ changeS = function()
     {
         alert(sInvalidTxt);
     } else if(SkinPrompt == 0.1) {
-        if(skinPag == 2) skinChangePage(false, 1);
-        if(skinPag == 3) skinChangePage(false, 2);
         if(!ChickenS2) localStorage.setItem("followClicked", 1);
         changeSkin(0);
         if(!ChickenS2) localStorage.removeItem("followClicked");
@@ -267,43 +310,27 @@ changeS = function()
         alert(sNotChangedTxt);
     } else {
         if(SkinPrompt == 1) {
-           if(skinPag == 2) skinChangePage(false, 1);
-           if(skinPag == 3) skinChangePage(false, 2);
            if(!TweetS2) localStorage.setItem("tweetClicked", 1);
            changeSkin(SkinPrompt);
            if(!TweetS2) localStorage.removeItem("tweetClicked");
         } else if(SkinPrompt == 2) {
-           if(skinPag == 2) skinChangePage(false, 1);
-           if(skinPag == 3) skinChangePage(false, 2);
            if(!CowS2) localStorage.setItem("likeClicked", 1);
            changeSkin(SkinPrompt);
            if(!CowS2) localStorage.removeItem("likeClicked");
         } else if(SkinPrompt == 3) {
-           if(skinPag == 2) skinChangePage(false, 1);
-           if(skinPag == 3) skinChangePage(false, 2);
            if(!RedBirdS2) localStorage.setItem("subscribeClicked", 1);
            changeSkin(SkinPrompt);
            if(!RedBirdS2) localStorage.removeItem("subscribeClicked");
         } else if(SkinPrompt == 4) {
-           if(skinPag == 1) skinChangePage(true, 1);
-           if(skinPag == 3) skinChangePage(false, 1);
            if(!ElephantS2) localStorage.setItem("shareClicked", 1);
            changeSkin(SkinPrompt);
            if(!ElephantS2) localStorage.removeItem("shareClicked");
         } else {
-          if(SkinPrompt <= 9) {
           try {
-           if(SkinPrompt >= 8 && skinPag == 1) skinChangePage(true, 2);
-           if(SkinPrompt >= 8 && skinPag == 2) skinChangePage(true, 1);
-           if(SkinPrompt >= 4 && SkinPrompt < 8 && skinPag == 1) skinChangePage(true, 1);
-           if(SkinPrompt >= 4 && SkinPrompt < 8 && skinPag == 3) skinChangePage(false, 1);
            changeSkin(SkinPrompt);
           } catch(err) {
-						console.error("Superhex.io Scr1pt error changing skin by ID: " + err);
+						console.error("Superhex.io Scr1pt Error changing skin by ID: " + err);
             alert(sErrorTxt);
-          }
-          } else {
-            alert(sTheSTxt + SkinPrompt + sNoExist);
           }
         }
     }
@@ -358,16 +385,16 @@ unlockSK = function()
 };
 
 var scrText1 = document.createElement("h2");
-scrText1.setAttribute("style", "color: white; position: fixed; top: 50px; left: 30px;");
+scrText1.setAttribute("style", "color: white; position: fixed; top: 80px; left: 30px;");
 scrText1.innerText = loadingScriptTxt;
 document.getElementById("homepage").appendChild(scrText1);
 
 mkGui = function() {
 
-scrText1.innerText = "Superhex.io Scr1pt v1.3";
+scrText1.innerText = "Superhex.io Scr1pt v1.4";
 
 var btn = document.createElement("Button");
-btn.setAttribute("style", "position: fixed; top: 110px; left: 30px; height:20px; width:140px;");
+btn.setAttribute("style", "position: fixed; top: 140px; left: 30px; height:20px; width:140px;");
 btn.setAttribute("class", "green");
 btn.setAttribute("type", "button");
 btn.setAttribute("id", "btn");
@@ -376,7 +403,7 @@ btn.setAttribute("onclick", "goGitHub();");
 document.getElementById("homepage").appendChild(btn);
 
 var btn2 = document.createElement("Button");
-btn2.setAttribute("style", "position: fixed; top: 140px; left: 30px; height:20px; width:140px;");
+btn2.setAttribute("style", "position: fixed; top: 170px; left: 30px; height:20px; width:140px;");
 btn2.setAttribute("class", "green");
 btn2.setAttribute("type", "button");
 btn2.setAttribute("id", "btn2");
@@ -385,7 +412,7 @@ btn2.setAttribute("onclick", "changeQ();");
 document.getElementById("homepage").appendChild(btn2);
 
 var btn3 = document.createElement("Button");
-btn3.setAttribute("style", "position: fixed; top: 170px; left: 30px; height:20px; width:140px;");
+btn3.setAttribute("style", "position: fixed; top: 200px; left: 30px; height:20px; width:140px;");
 btn3.setAttribute("class", "green");
 btn3.setAttribute("type", "button");
 btn3.setAttribute("id", "btn3");
@@ -394,7 +421,7 @@ btn3.setAttribute("onclick", "changeS();");
 document.getElementById("homepage").appendChild(btn3);
 
 var btn5 = document.createElement("Button");
-btn5.setAttribute("style", "position: fixed; top: 200px; left: 30px; height:20px; width:140px;");
+btn5.setAttribute("style", "position: fixed; top: 230px; left: 30px; height:20px; width:140px;");
 btn5.setAttribute("class", "green");
 btn5.setAttribute("type", "button");
 btn5.setAttribute("id", "btn5");
@@ -405,20 +432,20 @@ document.getElementById("homepage").appendChild(btn5);
 var Check1 = document.createElement("INPUT");
 Check1.setAttribute("type", "checkbox");
 Check1.setAttribute("id", "checkAdBlock");
-Check1.setAttribute("style", "position: fixed; top: 230px; left: 30px;");
+Check1.setAttribute("style", "position: fixed; top: 260px; left: 30px;");
 Check1.setAttribute("onclick", "removeAds(true);");
 document.getElementById("homepage").appendChild(Check1);
 
 if(AdsTBM) Check1.checked = true;
 
 var check1Text = document.createElement("h5");
-check1Text.setAttribute("style", "color: white; position: fixed; top: 210px; left: 50px;");
+check1Text.setAttribute("style", "color: white; position: fixed; top: 240px; left: 50px;");
 check1Text.setAttribute("id", "check1Text");
 check1Text.innerText = "Remove ads";
 document.getElementById("homepage").appendChild(check1Text);
 
 var btn6 = document.createElement("Button");
-btn6.setAttribute("style", "position: fixed; top: 255px; left: 30px; height:20px; width:140px;");
+btn6.setAttribute("style", "position: fixed; top: 285px; left: 30px; height:20px; width:140px;");
 btn6.setAttribute("class", "green");
 btn6.setAttribute("type", "button");
 btn6.setAttribute("id", "btn6");
@@ -427,11 +454,17 @@ btn6.setAttribute("onclick", "unlockSK();");
 document.getElementById("homepage").appendChild(btn6);
 
 var btn7 = document.createElement("Button");
-btn7.setAttribute("style", "position: fixed; top: 285px; left: 30px; height:20px; width:140px;");
+btn7.setAttribute("style", "position: fixed; top: 315px; left: 30px; height:20px; width:140px;");
 btn7.setAttribute("class", "green");
 btn7.setAttribute("type", "button");
 btn7.setAttribute("id", "btn7");
 btn7.innerText = "Español (Spanish)";
 btn7.setAttribute("onclick", "changeLang(true, false);");
 document.getElementById("homepage").appendChild(btn7);
+
+var scrText2 = document.createElement("h4");
+scrText2.setAttribute("style", "color: white; position: fixed; top: 50px; right: 10px;");
+scrText2.setAttribute("id", "scrText2");
+scrText2.innerText = keyActionsTxt;
+document.getElementById("homepage").appendChild(scrText2);
 };

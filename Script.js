@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
 // @namespace    Superhex.io Scr1pt
-// @version      1.4
+// @version      1.4.1
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
 // @icon         http://superhex.io/img/fav_icon_1.png
 // @description  Script for Superhex.io
@@ -10,6 +10,7 @@
 // @match        http://superhex.io/*
 // @grant        none
 // ==/UserScript==
+
 storageAvailable = function(type){
 	try{
 		var storage = window[type],
@@ -65,6 +66,9 @@ var loadingScriptTxt = "Loading Superhex.io Scr1pt...";
 var sAlreadyTxt = "You already have the skin ";
 var sAlreadyTxt2 = ""; //Dejar vacio
 var keyActionsTxt = "Keys:\n\n1 = Hide/show Leaderboard.\n0 = Hide/show UI.\n2 = Show/hide FPS and other data.";
+var partyTxt = "Party ID:";
+var party5Txt = "The ID of the Party can't be less than 5.";
+var party6Txt = "The ID of the Party can't be greater than 6.";
 
 window.onload = function ()
 {
@@ -115,6 +119,9 @@ changeLang = function(write, ing)
 		sElephantTxt = "Elefante.";
 		sAlreadyTxt = "Ya tienes el skin ";
 		sAlreadyTxt2 = " puesto.";
+		partyTxt = "ID de la Party:";
+		party5Txt = "El ID de la Party no puede ser menor a 5.";
+		party6Txt = "El ID de la Party no puede ser mayor a 6.";
 		keyActionsTxt = "Teclas:\n\n1 = Oculta/muestra la Tabla de clasificación.\n0 = Oculta/muestra la UI.\n2 = Muestra/oculta los FPS y otros datos.";
 		document.getElementById("btn2").innerText = "Cambiar calidad";
 		document.getElementById("btn3").innerText = "Establecer Skin (ID)";
@@ -123,6 +130,7 @@ changeLang = function(write, ing)
 		document.getElementById("btn6").innerText = "Desbloquear skins";
 		document.getElementById("btn7").innerText = "English (Inglés)";
 		document.getElementById("btn7").setAttribute("onclick", "changeLang(false, true);");
+		document.getElementById("btn8").innerText = "Crear Party";
 		document.getElementById("scrText2").innerText = keyActionsTxt;
     if(write) {
    if(storageAvailable('localStorage')) localStorage.setItem('LangTBM', 'ES');
@@ -344,9 +352,15 @@ changeT1 = function()
     {
         alert(pTextNotChangedTxt);
     } else {
+			  if(Text1Prompt != "Play") {
         document.getElementById("button-play-text").innerText = Text1Prompt;
         if(storageAvailable('localStorage')) localStorage.setItem("Text1TBM", Text1Prompt);
         alert(pTextChangedTxt + Text1Prompt);
+			} else {
+				document.getElementById("button-play-text").innerText = Text1Prompt;
+				if(storageAvailable('localStorage')) localStorage.removeItem("Text1TBM");
+				alert(pTextChangedTxt + Text1Prompt);
+			}
     }
 };
 
@@ -384,6 +398,22 @@ unlockSK = function()
 } else {alert(localStorageTxt);}
 };
 
+mkParty = function() {
+	var partyPrompt = window.prompt(partyTxt);
+	if(partyPrompt !== null && partyPrompt.length != 0) {
+		if(partyPrompt.length < 5) {
+			alert(party5Txt);
+		} else if(partyPrompt.length > 6) {
+			alert(party6Txt);
+		} else {
+			document.getElementById("create-party").style.display = "none";
+			document.getElementById("in-party").style.display = "block";
+			window.location.hash = partyPrompt;
+			document.getElementById("party-share-link").value = "http://" + window.location.hostname + (window.location.port ? ":" + window.location.port : "") + window.location.pathname + "#" + partyPrompt;
+		}
+	}
+};
+
 var scrText1 = document.createElement("h2");
 scrText1.setAttribute("style", "color: white; position: fixed; top: 80px; left: 30px;");
 scrText1.innerText = loadingScriptTxt;
@@ -391,7 +421,7 @@ document.getElementById("homepage").appendChild(scrText1);
 
 mkGui = function() {
 
-scrText1.innerText = "Superhex.io Scr1pt v1.4";
+scrText1.innerText = "Superhex.io Scr1pt v1.4.1";
 
 var btn = document.createElement("Button");
 btn.setAttribute("style", "position: fixed; top: 140px; left: 30px; height:20px; width:140px;");
@@ -432,20 +462,20 @@ document.getElementById("homepage").appendChild(btn5);
 var Check1 = document.createElement("INPUT");
 Check1.setAttribute("type", "checkbox");
 Check1.setAttribute("id", "checkAdBlock");
-Check1.setAttribute("style", "position: fixed; top: 260px; left: 30px;");
+Check1.setAttribute("style", "position: fixed; top: 348px; left: 30px;");
 Check1.setAttribute("onclick", "removeAds(true);");
 document.getElementById("homepage").appendChild(Check1);
 
 if(AdsTBM) Check1.checked = true;
 
 var check1Text = document.createElement("h5");
-check1Text.setAttribute("style", "color: white; position: fixed; top: 240px; left: 50px;");
+check1Text.setAttribute("style", "color: white; position: fixed; top: 328px; left: 50px;");
 check1Text.setAttribute("id", "check1Text");
 check1Text.innerText = "Remove ads";
 document.getElementById("homepage").appendChild(check1Text);
 
 var btn6 = document.createElement("Button");
-btn6.setAttribute("style", "position: fixed; top: 285px; left: 30px; height:20px; width:140px;");
+btn6.setAttribute("style", "position: fixed; top: 260px; left: 30px; height:20px; width:140px;");
 btn6.setAttribute("class", "green");
 btn6.setAttribute("type", "button");
 btn6.setAttribute("id", "btn6");
@@ -453,8 +483,17 @@ btn6.innerText = "Unlock skins";
 btn6.setAttribute("onclick", "unlockSK();");
 document.getElementById("homepage").appendChild(btn6);
 
+var btn8 = document.createElement("Button");
+btn8.setAttribute("style", "position: fixed; top: 290px; left: 30px; height:20px; width:140px;");
+btn8.setAttribute("class", "green");
+btn8.setAttribute("type", "button");
+btn8.setAttribute("id", "btn8");
+btn8.innerText = "Create Party";
+btn8.setAttribute("onclick", "mkParty();");
+document.getElementById("homepage").appendChild(btn8);
+
 var btn7 = document.createElement("Button");
-btn7.setAttribute("style", "position: fixed; top: 315px; left: 30px; height:20px; width:140px;");
+btn7.setAttribute("style", "position: fixed; top: 320px; left: 30px; height:20px; width:140px;");
 btn7.setAttribute("class", "green");
 btn7.setAttribute("type", "button");
 btn7.setAttribute("id", "btn7");

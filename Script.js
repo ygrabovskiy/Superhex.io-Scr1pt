@@ -83,9 +83,9 @@ changeLang = function(write, ing) {
 		document.getElementById("btn7").setAttribute("onclick", "changeLang(true, false);");
   } else {
 		loadingScriptTxt = "Cargando Superhex.io Scr1pt...";
-    adsRestoredTxt = "Anuncios activados. Para que sean visibles, es necesario recargar la página.";
+    adsRestoredTxt = "Anuncios restaurados. Para que sean visibles, es necesario recargar la página.";
     adBlockedTxt = "Anuncio bloqueado por Superhex.io Scr1pt";
-    adsRemovedTxt = "Anuncios desactivados.";
+    adsRemovedTxt = "Anuncios removidos.";
     qChangeTxt = "Calidad:\n0.5: Low (Baja)\n0.75: Medium (Media)\n1: High (Alta)";
     q27Txt = "ADVERTENCIA: Establecer la calidad mayor a 2.7 puede causar problemas.";
     q01Txt = "ADVERTENCIA: Establecer la calidad menor a 0.1 puede causar problemas.";
@@ -120,7 +120,7 @@ changeLang = function(write, ing) {
 		document.getElementById("btn2").innerText = "Cambiar calidad";
 		document.getElementById("btn3").innerText = "Establecer Skin (ID)";
 		document.getElementById("btn5").innerText = "Texto del botón Play";
-		document.getElementById("check1Text").innerText = "Desactivar anuncios";
+		document.getElementById("check1Text").innerText = "Remover anuncios";
 		document.getElementById("btn6").innerText = "Desbloquear skins";
 		document.getElementById("btn7").innerText = "English (Inglés)";
 		document.getElementById("btn7").setAttribute("onclick", "changeLang(false, true);");

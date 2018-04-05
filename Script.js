@@ -377,7 +377,7 @@ mkGui = function() {
 scrText1.innerText = "Superhex.io Scr1pt v1.4.1";
 
 var btn = document.createElement("Button");
-btn.setAttribute("style", "position: fixed; top: 140px; left: 30px; height:20px; width:140px;");
+btn.setAttribute("style", "position: fixed; top: 140px; left: 30px; height:25px; width:140px;");
 btn.setAttribute("class", "green");
 btn.setAttribute("type", "button");
 btn.setAttribute("id", "btn");
@@ -386,7 +386,7 @@ btn.setAttribute("onclick", "goGitHub();");
 document.getElementById("homepage").appendChild(btn);
 
 var btn2 = document.createElement("Button");
-btn2.setAttribute("style", "position: fixed; top: 170px; left: 30px; height:20px; width:140px;");
+btn2.setAttribute("style", "position: fixed; top: 175px; left: 30px; height:25px; width:140px;");
 btn2.setAttribute("class", "green");
 btn2.setAttribute("type", "button");
 btn2.setAttribute("id", "btn2");
@@ -395,7 +395,7 @@ btn2.setAttribute("onclick", "changeQ();");
 document.getElementById("homepage").appendChild(btn2);
 
 var btn3 = document.createElement("Button");
-btn3.setAttribute("style", "position: fixed; top: 200px; left: 30px; height:20px; width:140px;");
+btn3.setAttribute("style", "position: fixed; top: 210px; left: 30px; height:25px; width:140px;");
 btn3.setAttribute("class", "green");
 btn3.setAttribute("type", "button");
 btn3.setAttribute("id", "btn3");
@@ -404,7 +404,7 @@ btn3.setAttribute("onclick", "changeS();");
 document.getElementById("homepage").appendChild(btn3);
 
 var btn5 = document.createElement("Button");
-btn5.setAttribute("style", "position: fixed; top: 230px; left: 30px; height:20px; width:140px;");
+btn5.setAttribute("style", "position: fixed; top: 245px; left: 30px; height:25px; width:140px;");
 btn5.setAttribute("class", "green");
 btn5.setAttribute("type", "button");
 btn5.setAttribute("id", "btn5");
@@ -415,20 +415,20 @@ document.getElementById("homepage").appendChild(btn5);
 var Check1 = document.createElement("INPUT");
 Check1.setAttribute("type", "checkbox");
 Check1.setAttribute("id", "checkAdBlock");
-Check1.setAttribute("style", "position: fixed; top: 348px; left: 30px;");
+Check1.setAttribute("style", "position: fixed; top: 383px; left: 30px;");
 Check1.setAttribute("onclick", "removeAds(true);");
 document.getElementById("homepage").appendChild(Check1);
 
 if(AdsTBM) Check1.checked = true;
 
 var check1Text = document.createElement("h5");
-check1Text.setAttribute("style", "color: white; position: fixed; top: 328px; left: 50px;");
+check1Text.setAttribute("style", "color: white; position: fixed; top: 363px; left: 50px;");
 check1Text.setAttribute("id", "check1Text");
 check1Text.innerText = "Remove ads";
 document.getElementById("homepage").appendChild(check1Text);
 
 var btn6 = document.createElement("Button");
-btn6.setAttribute("style", "position: fixed; top: 260px; left: 30px; height:20px; width:140px;");
+btn6.setAttribute("style", "position: fixed; top: 280px; left: 30px; height:25px; width:140px;");
 btn6.setAttribute("class", "green");
 btn6.setAttribute("type", "button");
 btn6.setAttribute("id", "btn6");
@@ -437,7 +437,7 @@ btn6.setAttribute("onclick", "unlockSK();");
 document.getElementById("homepage").appendChild(btn6);
 
 var btn8 = document.createElement("Button");
-btn8.setAttribute("style", "position: fixed; top: 290px; left: 30px; height:20px; width:140px;");
+btn8.setAttribute("style", "position: fixed; top: 315px; left: 30px; height:25px; width:140px;");
 btn8.setAttribute("class", "green");
 btn8.setAttribute("type", "button");
 btn8.setAttribute("id", "btn8");
@@ -446,7 +446,7 @@ btn8.setAttribute("onclick", "mkParty();");
 document.getElementById("homepage").appendChild(btn8);
 
 var btn7 = document.createElement("Button");
-btn7.setAttribute("style", "position: fixed; top: 320px; left: 30px; height:20px; width:140px;");
+btn7.setAttribute("style", "position: fixed; top: 350px; left: 30px; height:25px; width:140px;");
 btn7.setAttribute("class", "green");
 btn7.setAttribute("type", "button");
 btn7.setAttribute("id", "btn7");

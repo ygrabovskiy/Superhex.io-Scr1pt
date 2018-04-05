@@ -22,3 +22,6 @@
 * Función que oculta/muestra la Tabla de clasificación cuando se presiona 1 (uno).
 * Función que muestra/oculta los FPS y otros datos cuando se presiona 2 (dos).
 * Disponible en Inglés y Español.
+
+# Greasy Fork: 
+https://greasyfork.org/es/scripts/36071-superhex-io-scr1pt

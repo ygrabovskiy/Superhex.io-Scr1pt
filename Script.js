@@ -11,77 +11,71 @@
 // @grant        none
 // ==/UserScript==
 
-storageAvailable = function(type){
-	try{
+storageAvailable = function(type) {
+	try {
 		var storage = window[type],
-			x = '__storage_test__';
+		x = '__storage_test__';
 		storage.setItem(x, x);
 		storage.removeItem(x);
 		return true;
 	}
-	catch(e){
+	catch(e) {
 		return false;
 	}
 };
 
 var currSkin = 0;
-if(storageAvailable('localStorage'))
-{
-var Text1TBM = localStorage.getItem("Text1TBM");
-var AdsTBM = localStorage.getItem("AdsTBM");
-var Language = localStorage.getItem("LangTBM");
-currSkin = localStorage.getItem("selectedSkin");
-} else {console.warn("WARNING: Your browser doesn't support localStorage.");}
-var adsDeleted = false;
-var skinPag = 1;
-var adsRestoredTxt = "Ads restored. The changes will take effect when the page is reloaded.";
-var adBlockedTxt = "Ad blocked by Superhex.io Scr1pt";
-var adsRemovedTxt = "Ads removed.";
-var qChangeTxt = "Quality:\n0.5: Low\n0.75: Medium\n1: High";
-var q27Txt = "WARNING: Setting the quality higher than 2.7 may cause problems.";
-var q01Txt = "WARNING: Setting the quality lower than 0.1 may cause problems.";
-var qInvalidTxt = "Invalid quality. You can only insert numbers.\nExample: 1.2";
-var qNotChangedTxt = "Quality not changed.";
-var qChangedTxt = "Quality changed to: ";
-var sChangeTxt = "Skin ID:\nNote: To set the Skin 0 should use 0.1";
-var sInvalidTxt = "Skin ID invalid. You can only insert numbers.";
-var s0Txt = "Skin changed to: 0";
-var sNotChangedTxt = "Skin not changed.";
-var sChangedTxt = "Skin changed to: ";
-var sErrorTxt = "An error has occurred. Make sure to insert a valid ID.";
-var sTheSTxt = "The skin ";
-var sNoExist = " doesn't exist. Enter a number less than 10.";
-var localStorageTxt = "Your browser doesn't support localStorage, therefore, you can't use this function.";
-var pTextTxt = "Play button text:";
-var pTextNotChangedTxt = "Play button text not changed.";
-var pTextChangedTxt = "Play button text changed to: ";
-var sUnlockekdTxt = "You already have the skins unlocked.";
-var sUnlockedsTxt = "The following skins were unlocked:";
-var sChickenTxt = "Yellow chicken.";
-var sBirdTxt = "Light blue bird.";
-var sCowTxt = "Cow.";
-var sBird2Txt = "Red bird.";
-var sElephantTxt = "Elephant.";
-var loadingScriptTxt = "Loading Superhex.io Scr1pt...";
-var sAlreadyTxt = "You already have the skin ";
-var sAlreadyTxt2 = ""; //Dejar vacio
-var keyActionsTxt = "Keys:\n\n1 = Hide/show Leaderboard.\n0 = Hide/show UI.\n2 = Show/hide FPS and other data.";
-var partyTxt = "Party ID:";
-var party5Txt = "The ID of the Party can't be less than 5.";
-var party6Txt = "The ID of the Party can't be greater than 6.";
+if(storageAvailable('localStorage')) {
+var Text1TBM = localStorage.getItem("Text1TBM"), AdsTBM = localStorage.getItem("AdsTBM"), Language = localStorage.getItem("LangTBM"); currSkin = localStorage.getItem("selectedSkin");
+} else console.warn("WARNING: Your browser doesn't support localStorage.\nADVERTENCIA: Tu navegador no soporta localStorage (almacenamiento local).");
+var adsDeleted = false,
+skinPag = 1,
+adsRestoredTxt = "Ads restored. The changes will take effect when the page is reloaded.",
+adBlockedTxt = "Ad blocked by Superhex.io Scr1pt",
+adsRemovedTxt = "Ads removed.",
+qChangeTxt = "Quality:\n0.5: Low\n0.75: Medium\n1: High",
+q27Txt = "WARNING: Setting the quality higher than 2.7 may cause problems.",
+q01Txt = "WARNING: Setting the quality lower than 0.1 may cause problems.",
+qInvalidTxt = "Invalid quality. You can only insert numbers.\nExample: 1.2",
+qNotChangedTxt = "Quality not changed.",
+qChangedTxt = "Quality changed to: ",
+sChangeTxt = "Skin ID:\nNote: To set the Skin 0 should use 0.1",
+sInvalidTxt = "Skin ID invalid. You can only insert numbers.",
+s0Txt = "Skin changed to: 0",
+sNotChangedTxt = "Skin not changed.",
+sChangedTxt = "Skin changed to: ",
+sErrorTxt = "An error has occurred. Make sure to insert a valid ID.",
+sTheSTxt = "The skin ",
+sNoExist = " doesn't exist. Enter a number less than 10.",
+localStorageTxt = "Your browser doesn't support localStorage, therefore, you can't use this function.",
+pTextTxt = "Play button text:",
+pTextNotChangedTxt = "Play button text not changed.",
+pTextChangedTxt = "Play button text changed to: ",
+sUnlockekdTxt = "You already have the skins unlocked.",
+sUnlockedsTxt = "The following skins were unlocked:",
+sChickenTxt = "Yellow chicken.",
+sBirdTxt = "Light blue bird.",
+sCowTxt = "Cow.",
+sBird2Txt = "Red bird.",
+sElephantTxt = "Elephant.",
+loadingScriptTxt = "Loading Superhex.io Scr1pt...",
+sAlreadyTxt = "You already have the skin ",
+sAlreadyTxt2 = "", //Dejar vacio
+keyActionsTxt = "Keys:\n\n1 = Hide/show Leaderboard.\n0 = Hide/show UI.\n2 = Show/hide FPS and other data.",
+partyTxt = "Party ID:",
+party5Txt = "The ID of the Party can't be less than 5.",
+party6Txt = "The ID of the Party can't be greater than 6.";
 
-window.onload = function ()
-{
+window.onload = function () {
   mkGui();
-  var skinRightArrow = document.getElementById("skin-right-arrow");
-  var skinLeftArrow = document.getElementById("skin-left-arrow");
+  var skinRightArrow = document.getElementById("skin-right-arrow"),
+  skinLeftArrow = document.getElementById("skin-left-arrow");
   skinRightArrow.setAttribute("onclick", "skinChangePage(true, 1)");
   skinLeftArrow.setAttribute("onclick", "skinChangePage(false, 1)");
 	if(storageAvailable('localStorage') && Language == "ES") changeLang(false, false);
 };
 
-changeLang = function(write, ing)
-{
+changeLang = function(write, ing) {
   if(ing) {
     if(storageAvailable('localStorage')) localStorage.setItem('LangTBM', 'EN');
     alert("Language changed to English. The changes will take effect when the page is reloaded.");
@@ -133,279 +127,238 @@ changeLang = function(write, ing)
 		document.getElementById("btn8").innerText = "Crear Party";
 		document.getElementById("scrText2").innerText = keyActionsTxt;
     if(write) {
-   if(storageAvailable('localStorage')) localStorage.setItem('LangTBM', 'ES');
-   alert("Idioma cambiado a Español.");
-   }
+      if(storageAvailable('localStorage')) localStorage.setItem('LangTBM', 'ES');
+      alert("Idioma cambiado a Español.");
+    }
   }
 };
 
-skinChangePage = function(next, cantidad)
-{
+skinChangePage = function(next, cantidad) {
   if(!next) {
     if(cantidad == 1) {
-    superhex.previousSkins();
-    skinPag--;
-  } else if(cantidad == 2) {
-    superhex.previousSkins();
-    superhex.previousSkins();
-    skinPag = skinPag - 2;
-  } else if(cantidad == 3) {
-    superhex.previousSkins();
-    superhex.previousSkins();
-    superhex.previousSkins();
-    skinPag = skinPag - 3;
-  }
+      superhex.previousSkins();
+      skinPag--;
+    } else if(cantidad == 2) {
+      superhex.previousSkins();
+      superhex.previousSkins();
+      skinPag = skinPag - 2;
+    } else if(cantidad == 3) {
+      superhex.previousSkins();
+      superhex.previousSkins();
+      superhex.previousSkins();
+      skinPag = skinPag - 3;
+    }
   } else {
     if(cantidad == 1)  {
-    superhex.nextSkins();
-    skinPag++;
-  } else if(cantidad == 2) {
-    superhex.nextSkins();
-    superhex.nextSkins();
-    skinPag = skinPag + 2;
-  } else if(cantidad == 3) {
-    superhex.nextSkins();
-    superhex.nextSkins();
-    superhex.nextSkins();
-    skinPag = skinPag + 3;
-  }
+      superhex.nextSkins();
+      skinPag++;
+    } else if(cantidad == 2) {
+      superhex.nextSkins();
+      superhex.nextSkins();
+      skinPag = skinPag + 2;
+    } else if(cantidad == 3) {
+      superhex.nextSkins();
+      superhex.nextSkins();
+      superhex.nextSkins();
+      skinPag = skinPag + 3;
+    }
   }
 };
 
-changeSkin = function(ID)
-{
-	 var canChangeS = true;
-	 if(currSkin != ID) {
-	 if(ID <= 3) {
-     if(skinPag == 2) {skinChangePage(false, 1);} else if(skinPag == 3) {skinChangePage(false, 2);}
-	 } else if(ID <= 7) {
-		 if(skinPag == 1) {skinChangePage(true, 1);} else if(skinPag == 3) {skinChangePage(false, 1);}
-	 } else if(ID <= 9) {
-		 if(skinPag == 2) {skinChangePage(true, 1);} else if(skinPag == 1) {skinChangePage(true, 2);}
-	 } else {
-		 alert(sTheSTxt + ID + sNoExist);
-		 canChangeS = false;
-	 }
-	 if(canChangeS == true)
-	 {
-	 superhex.selectSkin(ID);
-	 currSkin = ID;
-	 alert(sChangedTxt + ID);
-   }
- } else {alert(sAlreadyTxt + ID + sAlreadyTxt2);}
+changeSkin = function(ID) {
+	var canChangeS = true;
+	if(currSkin != ID) {
+	  if(ID <= 3) {
+      if(skinPag == 2) skinChangePage(false, 1); else if(skinPag == 3) skinChangePage(false, 2);
+	  } else if(ID <= 7) {
+		  if(skinPag == 1) skinChangePage(true, 1); else if(skinPag == 3) skinChangePage(false, 1);
+	  } else if(ID <= 9) {
+		  if(skinPag == 2) skinChangePage(true, 1); else if(skinPag == 1) skinChangePage(true, 2);
+	  } else {
+		  alert(sTheSTxt + ID + sNoExist);
+		  canChangeS = false;
+	  }
+	    if(canChangeS == true) {
+	      superhex.selectSkin(ID);
+	      currSkin = ID;
+	      alert(sChangedTxt + ID);
+      }
+  } else alert(sAlreadyTxt + ID + sAlreadyTxt2);
 };
 
-removeAds = function(checkBox)
-{
-   if(checkBox)
-   {
-     if(!document.getElementById("checkAdBlock").checked) //Restore Ads
-     {
-         if(storageAvailable('localStorage')) localStorage.removeItem("AdsTBM");
-         adsDeleted = true;
-         alert(adsRestoredTxt);
-       } else {
-    if(storageAvailable('localStorage')) localStorage.setItem("AdsTBM", true);
-    superhex.clickPlay = superhex.aipComplete;
-    superhex.clickPlayAgain = superhex.aipComplete;
-    if(!adsDeleted) {
-    var Ad14 = document.getElementById("div-gpt-ad-1490263292583-0");
-    Ad14.innerHTML = adBlockedTxt;
-    Ad14.setAttribute("id", "adBlockedTBM");
-    Ad14 = document.getElementById("adBlockedTBM");
-    Ad14.setAttribute("data-google-query-id", "null");
-    document.getElementById("cdm-zone-01").innerHTML = adBlockedTxt;
-  }
-    alert(adsRemovedTxt);
-  }
-} else {
+removeAds = function(checkBox) {
+  if(checkBox) {
+    if(!document.getElementById("checkAdBlock").checked) { //Restore Ads
+      if(storageAvailable('localStorage')) localStorage.removeItem("AdsTBM");
+        adsDeleted = true;
+        alert(adsRestoredTxt);
+    } else {
+      if(storageAvailable('localStorage')) localStorage.setItem("AdsTBM", true);
       superhex.clickPlay = superhex.aipComplete;
       superhex.clickPlayAgain = superhex.aipComplete;
-      setTimeout(function(){
+      if(!adsDeleted) {
         var Ad14 = document.getElementById("div-gpt-ad-1490263292583-0");
         Ad14.innerHTML = adBlockedTxt;
         Ad14.setAttribute("id", "adBlockedTBM");
         Ad14 = document.getElementById("adBlockedTBM");
         Ad14.setAttribute("data-google-query-id", "null");
         document.getElementById("cdm-zone-01").innerHTML = adBlockedTxt;
-      },1350);
-   }
+      }
+      alert(adsRemovedTxt);
+    }
+  } else {
+    superhex.clickPlay = superhex.aipComplete;
+    superhex.clickPlayAgain = superhex.aipComplete;
+    setTimeout(function(){
+      var Ad14 = document.getElementById("div-gpt-ad-1490263292583-0");
+      Ad14.innerHTML = adBlockedTxt;
+      Ad14.setAttribute("id", "adBlockedTBM");
+      Ad14 = document.getElementById("adBlockedTBM");
+      Ad14.setAttribute("data-google-query-id", "null");
+      document.getElementById("cdm-zone-01").innerHTML = adBlockedTxt;
+    },1350);
+  }
 };
 
 if(storageAvailable('localStorage')) {
-
 if(Text1TBM) document.getElementById("button-play-text").innerText = Text1TBM;
-
 if(AdsTBM) removeAds(false);
 }
 
-document.onkeydown = function(e) {
-	   try {
-     e = e || window.event;
-     var key = e.which || e.keyCode;
-     if(key===49 && document.getElementById("leaderboard").getAttribute("style") != null) {
-       if(document.getElementById("leaderboard").getAttribute("style") == "display: block;") {
-				 document.getElementById("leaderboard").setAttribute("style", "display: none;");
-			 } else {document.getElementById("leaderboard").setAttribute("style", "display: block;");}
-     }
-		 if(key===48 && document.getElementById("leaderboard").getAttribute("style") != null) {
+document.onkeyup = function(e) {
+  try {
+    e = e || window.event;
+    var key = e.which || e.keyCode;
+    if(key===49 && document.getElementById("leaderboard").getAttribute("style") != null) if(document.getElementById("leaderboard").getAttribute("style") == "display: block;") document.getElementById("leaderboard").setAttribute("style", "display: none;"); else document.getElementById("leaderboard").setAttribute("style", "display: block;");
+		if(key===48 && document.getElementById("leaderboard").getAttribute("style") != null) {
       if(document.getElementById("leaderboard").getAttribute("style") == "display: block;") document.getElementById("leaderboard").setAttribute("style", "display: none;");
-			if(document.getElementById("minimap").getAttribute("style") == "display: block;") document.getElementById("minimap").setAttribute("style", "display: none;");
-			if(document.getElementById("friendsScores").getAttribute("style") == "display: block;") document.getElementById("friendsScores").setAttribute("style", "display: none;");
-			if(document.getElementById("score").getAttribute("style") == "display: block;") {document.getElementById("score").setAttribute("style", "display: none;");} else {
-				document.getElementById("score").setAttribute("style", "display: block;");
-				document.getElementById("minimap").setAttribute("style", "display: block;");
-				document.getElementById("leaderboard").setAttribute("style", "display: block;");
-				if(window.location.hash != "") document.getElementById("friendsScores").setAttribute("style", "display: block;");
-			}
-		 }
-		 if(key===50) {
-			 if(document.getElementById("fps").getAttribute("style") == "display: block; color: white;") {document.getElementById("fps").setAttribute("style", "display: none;");} else {document.getElementById("fps").setAttribute("style", "display: block; color: white;");}
-		 }
-	 } catch(err) {
-		 console.error("Superhex.io Scr1pt Error onkeydown: " + err);
-	 }
- };
+		  if(document.getElementById("minimap").getAttribute("style") == "display: block;") document.getElementById("minimap").setAttribute("style", "display: none;");
+	    if(document.getElementById("friendsScores").getAttribute("style") == "display: block;") document.getElementById("friendsScores").setAttribute("style", "display: none;");
+		  if(document.getElementById("score").getAttribute("style") == "display: block;") document.getElementById("score").setAttribute("style", "display: none;"); else {
+		    document.getElementById("score").setAttribute("style", "display: block;");
+			  document.getElementById("minimap").setAttribute("style", "display: block;");
+			  document.getElementById("leaderboard").setAttribute("style", "display: block;");
+			  if(window.location.hash != "") document.getElementById("friendsScores").setAttribute("style", "display: block;");
+		  }
+		}
+		if(key===50) if(document.getElementById("fps").getAttribute("style") == "display: block; color: white;") document.getElementById("fps").setAttribute("style", "display: none;"); else document.getElementById("fps").setAttribute("style", "display: block; color: white;");
+	} catch(err) {
+	  console.error("Superhex.io Scr1pt Error onkeydown: " + err);
+	}
+};
 
-goGitHub = function()
-{
+goGitHub = function() {
   window.open("https://github.com/Truebamateo/Superhex.io-Scr1pt");
 };
 
-changeQ = function()
-{
-    var QualityPrompt = window.prompt(qChangeTxt);
-    QualityPrompt = Number(QualityPrompt);
-    if(QualityPrompt > 2.7) alert(q27Txt);
-    if(QualityPrompt < 0.1 && QualityPrompt > 0) alert(q01Txt);
-    if(QualityPrompt.toString() == "NaN")
-    {
-        alert(qInvalidTxt);
-    } else if(QualityPrompt === 0) {
-        alert(qNotChangedTxt);
-    } else {
-        superhex.setQuality(QualityPrompt);
-        alert(qChangedTxt + QualityPrompt);
-    }
+changeQ = function() {
+  var QualityPrompt = window.prompt(qChangeTxt);
+  QualityPrompt = Number(QualityPrompt);
+  if(QualityPrompt > 2.7) alert(q27Txt);
+  if(QualityPrompt < 0.1 && QualityPrompt > 0) alert(q01Txt);
+  if(QualityPrompt.toString() == "NaN") alert(qInvalidTxt); else if(QualityPrompt === 0) alert(qNotChangedTxt); else {
+    superhex.setQuality(QualityPrompt);
+    alert(qChangedTxt + QualityPrompt);
+  }
 };
 
-changeS = function()
-{
-    var SkinPrompt = window.prompt(sChangeTxt);
-    SkinPrompt = Number(SkinPrompt);
-    superhex.nextSkins();
-    superhex.previousSkins();
-    var ChickenS2 = false;
-    var TweetS2 = false;
-    var CowS2 = false;
-    var RedBirdS2 = false;
-    var ElephantS2 = false;
-    if(storageAvailable('localStorage')) {
-		currSkin = localStorage.getItem("selectedSkin");
+changeS = function() {
+  var SkinPrompt = window.prompt(sChangeTxt);
+  SkinPrompt = Number(SkinPrompt);
+  superhex.nextSkins();
+  superhex.previousSkins();
+  var ChickenS2 = false,
+  TweetS2 = false,
+  CowS2 = false,
+  RedBirdS2 = false,
+  ElephantS2 = false;
+  if(storageAvailable('localStorage')) {
+	  currSkin = localStorage.getItem("selectedSkin");
     if(localStorage.getItem("followClicked")) ChickenS2 = true;
     if(localStorage.getItem("tweetClicked")) TweetS2 = true;
     if(localStorage.getItem("likeClicked")) CowS2 = true;
     if(localStorage.getItem("subscribeClicked")) RedBirdS2 = true;
     if(localStorage.getItem("shareClicked")) ElephantS2 = true;
-    if(SkinPrompt.toString() == "NaN")
-    {
-        alert(sInvalidTxt);
-    } else if(SkinPrompt == 0.1) {
-        if(!ChickenS2) localStorage.setItem("followClicked", 1);
-        changeSkin(0);
-        if(!ChickenS2) localStorage.removeItem("followClicked");
-    } else if(SkinPrompt === 0) {
-        alert(sNotChangedTxt);
-    } else {
+    if(SkinPrompt.toString() == "NaN") alert(sInvalidTxt); else if(SkinPrompt == 0.1) {
+      if(!ChickenS2) localStorage.setItem("followClicked", 1);
+      changeSkin(0);
+      if(!ChickenS2) localStorage.removeItem("followClicked");
+    } else if(SkinPrompt === 0) alert(sNotChangedTxt); else {
         if(SkinPrompt == 1) {
-           if(!TweetS2) localStorage.setItem("tweetClicked", 1);
-           changeSkin(SkinPrompt);
-           if(!TweetS2) localStorage.removeItem("tweetClicked");
+            if(!TweetS2) localStorage.setItem("tweetClicked", 1);
+            changeSkin(SkinPrompt);
+            if(!TweetS2) localStorage.removeItem("tweetClicked");
         } else if(SkinPrompt == 2) {
-           if(!CowS2) localStorage.setItem("likeClicked", 1);
-           changeSkin(SkinPrompt);
-           if(!CowS2) localStorage.removeItem("likeClicked");
+            if(!CowS2) localStorage.setItem("likeClicked", 1);
+            changeSkin(SkinPrompt);
+            if(!CowS2) localStorage.removeItem("likeClicked");
         } else if(SkinPrompt == 3) {
-           if(!RedBirdS2) localStorage.setItem("subscribeClicked", 1);
-           changeSkin(SkinPrompt);
-           if(!RedBirdS2) localStorage.removeItem("subscribeClicked");
+            if(!RedBirdS2) localStorage.setItem("subscribeClicked", 1);
+            changeSkin(SkinPrompt);
+            if(!RedBirdS2) localStorage.removeItem("subscribeClicked");
         } else if(SkinPrompt == 4) {
-           if(!ElephantS2) localStorage.setItem("shareClicked", 1);
-           changeSkin(SkinPrompt);
-           if(!ElephantS2) localStorage.removeItem("shareClicked");
+            if(!ElephantS2) localStorage.setItem("shareClicked", 1);
+            changeSkin(SkinPrompt);
+            if(!ElephantS2) localStorage.removeItem("shareClicked");
         } else {
-          try {
-           changeSkin(SkinPrompt);
-          } catch(err) {
-						console.error("Superhex.io Scr1pt Error changing skin by ID: " + err);
-            alert(sErrorTxt);
-          }
+            try {
+              changeSkin(SkinPrompt);
+            } catch(err) {
+						  console.error("Superhex.io Scr1pt Error changing skin by ID: " + err);
+              alert(sErrorTxt);
+            }
         }
     }
-  } else {alert(localStorageTxt);}
+  } else alert(localStorageTxt);
 };
 
-changeT1 = function()
-{
+changeT1 = function() {
   var Text1Prompt = window.prompt(pTextTxt);
-  if(Text1Prompt === null)
-    {
-        alert(pTextNotChangedTxt);
-    } else {
-			  if(Text1Prompt != "Play") {
-        document.getElementById("button-play-text").innerText = Text1Prompt;
-        if(storageAvailable('localStorage')) localStorage.setItem("Text1TBM", Text1Prompt);
-        alert(pTextChangedTxt + Text1Prompt);
-			} else {
-				document.getElementById("button-play-text").innerText = Text1Prompt;
-				if(storageAvailable('localStorage')) localStorage.removeItem("Text1TBM");
-				alert(pTextChangedTxt + Text1Prompt);
-			}
-    }
+  if(Text1Prompt === null) {
+    alert(pTextNotChangedTxt);
+  } else {
+	  if(Text1Prompt != "Play") {
+      document.getElementById("button-play-text").innerText = Text1Prompt;
+      if(storageAvailable('localStorage')) localStorage.setItem("Text1TBM", Text1Prompt);
+      alert(pTextChangedTxt + Text1Prompt);
+		} else {
+		  document.getElementById("button-play-text").innerText = Text1Prompt;
+			if(storageAvailable('localStorage')) localStorage.removeItem("Text1TBM");
+			alert(pTextChangedTxt + Text1Prompt);
+		}
+  }
 };
 
-unlockSK = function()
-{
+unlockSK = function() {
   if(storageAvailable('localStorage')) {
-  if(localStorage.getItem("shareClicked") && localStorage.getItem("subscribeClicked") && localStorage.getItem("likeClicked") && localStorage.getItem("tweetClicked") && localStorage.getItem("followClicked"))
-  {
-    alert(sUnlockekdTxt);
-  } else {
-    var ChickenS = true;
-    var TweetS = true;
-    var CowS = true;
-    var RedBirdS = true;
-    var ElephantS = true;
-    if(localStorage.getItem("followClicked")) ChickenS = false;
-    if(localStorage.getItem("tweetClicked")) TweetS = false;
-    if(localStorage.getItem("likeClicked")) CowS = false;
-    if(localStorage.getItem("subscribeClicked")) RedBirdS = false;
-    if(localStorage.getItem("shareClicked")) ElephantS = false;
-    localStorage.setItem("shareClicked", 1);
-    localStorage.setItem("subscribeClicked", 1);
-    localStorage.setItem("likeClicked", 1);
-    localStorage.setItem("tweetClicked", 1);
-    localStorage.setItem("followClicked", 1);
-    superhex.nextSkins();
-    superhex.previousSkins();
-    alert(sUnlockedsTxt);
-    if(ChickenS) alert(sChickenTxt);
-    if(TweetS) alert(sBirdTxt);
-    if(CowS) alert(sCowTxt);
-    if(RedBirdS) alert(sBird2Txt);
-    if(ElephantS) alert(sElephantTxt);
-  }
-} else {alert(localStorageTxt);}
+    if(localStorage.getItem("shareClicked") && localStorage.getItem("subscribeClicked") && localStorage.getItem("likeClicked") && localStorage.getItem("tweetClicked") && localStorage.getItem("followClicked")) alert(sUnlockekdTxt); else {
+      var ChickenS = true, TweetS = true, CowS = true, RedBirdS = true, ElephantS = true;
+      if(localStorage.getItem("followClicked")) ChickenS = false;
+      if(localStorage.getItem("tweetClicked")) TweetS = false;
+      if(localStorage.getItem("likeClicked")) CowS = false;
+      if(localStorage.getItem("subscribeClicked")) RedBirdS = false;
+      if(localStorage.getItem("shareClicked")) ElephantS = false;
+      localStorage.setItem("shareClicked", 1);
+      localStorage.setItem("subscribeClicked", 1);
+      localStorage.setItem("likeClicked", 1);
+      localStorage.setItem("tweetClicked", 1);
+      localStorage.setItem("followClicked", 1);
+      superhex.nextSkins();
+      superhex.previousSkins();
+      alert(sUnlockedsTxt);
+      if(ChickenS) alert(sChickenTxt);
+      if(TweetS) alert(sBirdTxt);
+      if(CowS) alert(sCowTxt);
+      if(RedBirdS) alert(sBird2Txt);
+      if(ElephantS) alert(sElephantTxt);
+    }
+  } else alert(localStorageTxt);
 };
 
 mkParty = function() {
-	var partyPrompt = window.prompt(partyTxt);
+  var partyPrompt = window.prompt(partyTxt);
 	if(partyPrompt !== null && partyPrompt.length != 0) {
-		if(partyPrompt.length < 5) {
-			alert(party5Txt);
-		} else if(partyPrompt.length > 6) {
-			alert(party6Txt);
-		} else {
+	  if(partyPrompt.length < 5) alert(party5Txt); else if(partyPrompt.length > 6) alert(party6Txt); else {
 			document.getElementById("create-party").style.display = "none";
 			document.getElementById("in-party").style.display = "block";
 			window.location.hash = partyPrompt;

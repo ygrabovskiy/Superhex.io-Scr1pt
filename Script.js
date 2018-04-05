@@ -229,8 +229,8 @@ document.onkeyup = function(e) {
   try {
     e = e || window.event;
     var key = e.which || e.keyCode;
-    if(key===49 && document.getElementById("leaderboard").getAttribute("style") != null) if(document.getElementById("leaderboard").getAttribute("style") == "display: block;") document.getElementById("leaderboard").setAttribute("style", "display: none;"); else document.getElementById("leaderboard").setAttribute("style", "display: block;");
-		if(key===48 && document.getElementById("leaderboard").getAttribute("style") != null) {
+    if(key===49 && document.getElementById("leaderboard").getAttribute("style") != null || key===97 && document.getElementById("leaderboard").getAttribute("style") != null) if(document.getElementById("leaderboard").getAttribute("style") == "display: block;") document.getElementById("leaderboard").setAttribute("style", "display: none;"); else document.getElementById("leaderboard").setAttribute("style", "display: block;");
+		if(key===48 && document.getElementById("leaderboard").getAttribute("style") != null || key===96 && document.getElementById("leaderboard").getAttribute("style") != null) {
       if(document.getElementById("leaderboard").getAttribute("style") == "display: block;") document.getElementById("leaderboard").setAttribute("style", "display: none;");
 		  if(document.getElementById("minimap").getAttribute("style") == "display: block;") document.getElementById("minimap").setAttribute("style", "display: none;");
 	    if(document.getElementById("friendsScores").getAttribute("style") == "display: block;") document.getElementById("friendsScores").setAttribute("style", "display: none;");
@@ -241,7 +241,7 @@ document.onkeyup = function(e) {
 			  if(window.location.hash != "") document.getElementById("friendsScores").setAttribute("style", "display: block;");
 		  }
 		}
-		if(key===50) if(document.getElementById("fps").getAttribute("style") == "display: block; color: white;") document.getElementById("fps").setAttribute("style", "display: none;"); else document.getElementById("fps").setAttribute("style", "display: block; color: white;");
+		if(key===50 || key === 98) if(document.getElementById("fps").getAttribute("style") == "display: block; color: white;") document.getElementById("fps").setAttribute("style", "display: none;"); else document.getElementById("fps").setAttribute("style", "display: block; color: white;");
 	} catch(err) {
 	  console.error("Superhex.io Scr1pt Error onkeydown: " + err);
 	}

@@ -26,54 +26,21 @@ storageAvailable = function(type) {
 
 var currSkin = 0;
 if(storageAvailable('localStorage')) {
-var Text1TBM = localStorage.getItem("Text1TBM"), AdsTBM = localStorage.getItem("AdsTBM"), Language = localStorage.getItem("LangTBM"); currSkin = localStorage.getItem("selectedSkin");
+var Text1TBM = localStorage.getItem("Text1TBM"), AdsTBM = localStorage.getItem("AdsTBM"), Language = localStorage.getItem("LangTBM"), currSkin = localStorage.getItem("selectedSkin"), currQuality = localStorage.getItem("quality");
 } else console.warn("WARNING: Your browser doesn't support localStorage.\nADVERTENCIA: Tu navegador no soporta localStorage (almacenamiento local).");
 var adsDeleted = false,
 skinPag = 1,
-adsRestoredTxt = "Ads restored. The changes will take effect when the page is reloaded.",
-adBlockedTxt = "Ad blocked by Superhex.io Scr1pt",
-adsRemovedTxt = "Ads removed.",
-qChangeTxt = "Quality:\n0.5: Low\n0.75: Medium\n1: High",
-q27Txt = "WARNING: Setting the quality higher than 2.7 may cause problems.",
-q01Txt = "WARNING: Setting the quality lower than 0.1 may cause problems.",
-qInvalidTxt = "Invalid quality. You can only insert numbers.\nExample: 1.2",
-qNotChangedTxt = "Quality not changed.",
-qChangedTxt = "Quality changed to: ",
-sChangeTxt = "Skin ID:\nNote: To set the Skin 0 should use 0.1",
-sInvalidTxt = "Skin ID invalid. You can only insert numbers.",
-s0Txt = "Skin changed to: 0",
-sNotChangedTxt = "Skin not changed.",
-sChangedTxt = "Skin changed to: ",
-sErrorTxt = "An error has occurred. Make sure to insert a valid ID.",
-sTheSTxt = "The skin ",
-sNoExist = " doesn't exist. Enter a number less than 10.",
+adsRestoredTxt = "Ads restored. The changes will take effect when the page is reloaded.", adBlockedTxt = "Ad blocked by Superhex.io Scr1pt", adsRemovedTxt = "Ads removed.",
+qChangeTxt = "Quality:\n0.5: Low\n0.75: Medium\n1: High", q27Txt = "WARNING: Setting the quality higher than 2.7 may cause problems.", q01Txt = "WARNING: Setting the quality lower than 0.1 may cause problems.", qInvalidTxt = "Invalid quality. You can only insert numbers.\nExample: 1.2", qNotChangedTxt = "Quality not changed.", qChangedTxt = "Quality changed to: ",
+sChangeTxt = "Skin ID:\nNote: To set the Skin 0 should use 0.1", sInvalidTxt = "Skin ID invalid. You can only insert numbers.", s0Txt = "Skin changed to: 0", sNotChangedTxt = "Skin not changed.", sChangedTxt = "Skin changed to: ", sErrorTxt = "An error has occurred. Make sure to insert a valid ID.", sTheSTxt = "The skin ", sNoExist = " doesn't exist. Enter a number less than 10.",
 localStorageTxt = "Your browser doesn't support localStorage, therefore, you can't use this function.",
-pTextTxt = "Play button text:",
-pTextNotChangedTxt = "Play button text not changed.",
-pTextChangedTxt = "Play button text changed to: ",
-sUnlockekdTxt = "You already have the skins unlocked.",
-sUnlockedsTxt = "The following skins were unlocked:",
-sChickenTxt = "Yellow chicken.",
-sBirdTxt = "Light blue bird.",
-sCowTxt = "Cow.",
-sBird2Txt = "Red bird.",
-sElephantTxt = "Elephant.",
+pTextTxt = "Play button text:", pTextNotChangedTxt = "Play button text not changed.", pTextChangedTxt = "Play button text changed to: ",
+sUnlockekdTxt = "You already have the skins unlocked.", sUnlockedsTxt = "The following skins were unlocked:", sChickenTxt = "Yellow chicken.", sBirdTxt = "Light blue bird.", sCowTxt = "Cow.", sBird2Txt = "Red bird.", sElephantTxt = "Elephant.",
 loadingScriptTxt = "Loading Superhex.io Scr1pt...",
-sAlreadyTxt = "You already have the skin ",
-sAlreadyTxt2 = "", //Dejar vacio
+sAlreadyTxt = "You already have the skin ", sAlreadyTxt2 = "",
 keyActionsTxt = "Keys:\n\n1 = Hide/show Leaderboard.\n0 = Hide/show UI.\n2 = Show/hide FPS and other data.",
-partyTxt = "Party ID:",
-party5Txt = "The ID of the Party can't be less than 5.",
-party6Txt = "The ID of the Party can't be greater than 6.";
-
-window.onload = function () {
-  mkGui();
-  var skinRightArrow = document.getElementById("skin-right-arrow"),
-  skinLeftArrow = document.getElementById("skin-left-arrow");
-  skinRightArrow.setAttribute("onclick", "skinChangePage(true, 1)");
-  skinLeftArrow.setAttribute("onclick", "skinChangePage(false, 1)");
-	if(storageAvailable('localStorage') && Language == "ES") changeLang(false, false);
-};
+partyTxt = "Party ID:", party5Txt = "The ID of the Party can't be less than 5.", party6Txt = "The ID of the Party can't be greater than 6.",
+highQB, MediumQB, lowQB;
 
 changeLang = function(write, ing) {
   if(ing) {
@@ -86,7 +53,7 @@ changeLang = function(write, ing) {
     adsRestoredTxt = "Anuncios restaurados. Para que sean visibles, es necesario recargar la página.";
     adBlockedTxt = "Anuncio bloqueado por Superhex.io Scr1pt";
     adsRemovedTxt = "Anuncios removidos.";
-    qChangeTxt = "Calidad:\n0.5: Low (Baja)\n0.75: Medium (Media)\n1: High (Alta)";
+    qChangeTxt = "Calidad:\n0.5: Baja\n0.75: Media\n1: Alta";
     q27Txt = "ADVERTENCIA: Establecer la calidad mayor a 2.7 puede causar problemas.";
     q01Txt = "ADVERTENCIA: Establecer la calidad menor a 0.1 puede causar problemas.";
     qInvalidTxt = "Calidad inválida. Solo puedes insertar números.\nEjemplo: 1.2";
@@ -117,7 +84,7 @@ changeLang = function(write, ing) {
 		party5Txt = "El ID de la Party no puede ser menor a 5.";
 		party6Txt = "El ID de la Party no puede ser mayor a 6.";
 		keyActionsTxt = "Teclas:\n\n1 = Oculta/muestra la Tabla de clasificación.\n0 = Oculta/muestra la UI.\n2 = Muestra/oculta los FPS y otros datos.";
-		document.getElementById("btn2").innerText = "Cambiar calidad";
+		document.getElementById("btn2").innerText = "Calidad personalizada";
 		document.getElementById("btn3").innerText = "Establecer Skin (ID)";
 		document.getElementById("btn5").innerText = "Texto del botón Play";
 		document.getElementById("check1Text").innerText = "Remover anuncios";
@@ -125,12 +92,36 @@ changeLang = function(write, ing) {
 		document.getElementById("btn7").innerText = "English (Inglés)";
 		document.getElementById("btn7").setAttribute("onclick", "changeLang(false, true);");
 		document.getElementById("btn8").innerText = "Crear Party";
-		document.getElementById("scrText2").innerText = keyActionsTxt;
+    document.getElementById("scrText2").innerText = keyActionsTxt;
+    highQB.innerText = "Alta";
+    MediumQB.innerText = "Media";
+    lowQB.innerText = "Baja";
+    Language = "ES";
     if(write) {
       if(storageAvailable('localStorage')) localStorage.setItem('LangTBM', 'ES');
       alert("Idioma cambiado a Español.");
     }
   }
+};
+
+window.onload = function () {
+  mkGui();
+  var skinRightArrow = document.getElementById("skin-right-arrow"),
+  skinLeftArrow = document.getElementById("skin-left-arrow");
+  skinRightArrow.setAttribute("onclick", "skinChangePage(true, 1)");
+  skinLeftArrow.setAttribute("onclick", "skinChangePage(false, 1)");
+  highQB = document.getElementById("button-quality-high");
+  MediumQB = document.getElementById("button-quality-medium");
+  lowQB = document.getElementById("button-quality-low");
+  if(storageAvailable('localStorage')) {
+    if(Language == "ES") changeLang(false, false);
+    if(AdsTBM) removeAds(false);
+    if(Text1TBM) document.getElementById("button-play-text").innerText = Text1TBM;
+    changeQuality(currQuality);
+  }
+  highQB.setAttribute("onclick", "changeQuality(1);");
+  MediumQB.setAttribute("onclick", "changeQuality(0.75);");
+  lowQB.setAttribute("onclick", "changeQuality(0.5);");
 };
 
 skinChangePage = function(next, cantidad) {
@@ -186,6 +177,16 @@ changeSkin = function(ID) {
   } else alert(sAlreadyTxt + ID + sAlreadyTxt2);
 };
 
+changeQuality = function(qualityValue) {
+  superhex.setQuality(qualityValue);
+  currQuality = localStorage.getItem("quality");
+  if(Language == "ES") btn2.innerText = "Calidad personalizada"; else btn2.innerText = "Custom Quality";
+  if(currQuality != 1 && currQuality != 0.75 && currQuality != 0.5) {
+    btn2.setAttribute("class", "green");
+    btn2.innerText = btn2.innerText + " (" + currQuality.toString() + ")";
+  } else btn2.setAttribute("class", "green unselected");
+};
+
 removeAds = function(checkBox) {
   if(checkBox) {
     if(!document.getElementById("checkAdBlock").checked) { //Restore Ads
@@ -220,11 +221,6 @@ removeAds = function(checkBox) {
   }
 };
 
-if(storageAvailable('localStorage')) {
-if(Text1TBM) document.getElementById("button-play-text").innerText = Text1TBM;
-if(AdsTBM) removeAds(false);
-}
-
 document.onkeyup = function(e) {
   try {
     e = e || window.event;
@@ -251,13 +247,17 @@ goGitHub = function() {
   window.open("https://github.com/Truebamateo/Superhex.io-Scr1pt");
 };
 
+goGreasyFork = function() {
+  window.open("https://greasyfork.org/es/scripts/36071-superhex-io-scr1pt");
+};
+
 changeQ = function() {
   var QualityPrompt = window.prompt(qChangeTxt);
   QualityPrompt = Number(QualityPrompt);
   if(QualityPrompt > 2.7) alert(q27Txt);
   if(QualityPrompt < 0.1 && QualityPrompt > 0) alert(q01Txt);
   if(QualityPrompt.toString() == "NaN") alert(qInvalidTxt); else if(QualityPrompt === 0) alert(qNotChangedTxt); else {
-    superhex.setQuality(QualityPrompt);
+    changeQuality(QualityPrompt);
     alert(qChangedTxt + QualityPrompt);
   }
 };
@@ -386,13 +386,22 @@ btn.setAttribute("onclick", "goGitHub();");
 document.getElementById("homepage").appendChild(btn);
 
 var btn2 = document.createElement("Button");
-btn2.setAttribute("style", "position: fixed; top: 175px; left: 30px; height:25px; width:140px;");
-btn2.setAttribute("class", "green");
+//btn2.setAttribute("style", "position: fixed; top: 50px; right: 30px; height:25px; width:140px;");
+btn2.setAttribute("class", "green unselected");
 btn2.setAttribute("type", "button");
 btn2.setAttribute("id", "btn2");
-btn2.innerText = "Change quality";
+btn2.innerText = "Custom Quality";
 btn2.setAttribute("onclick", "changeQ();");
-document.getElementById("homepage").appendChild(btn2);
+document.getElementById("button-quality-high").parentElement.appendChild(btn2);
+
+var btnGF = document.createElement("Button");
+btnGF.setAttribute("style", "position: fixed; top: 175px; left: 30px; height:25px; width:140px;");
+btnGF.setAttribute("class", "green");
+btnGF.setAttribute("type", "button");
+btnGF.setAttribute("id", "btnGF");
+btnGF.innerText = "Greasy Fork";
+btnGF.setAttribute("onclick", "goGreasyFork();");
+document.getElementById("homepage").appendChild(btnGF);
 
 var btn3 = document.createElement("Button");
 btn3.setAttribute("style", "position: fixed; top: 210px; left: 30px; height:25px; width:140px;");

@@ -1,7 +1,7 @@
 # Superhex.io Scr1pt
 <b>This script has the following features:</b>
 * Interface with buttons. They have the appearance of Superhex.io buttons.
-* Quality control of the game. (You can change the quality of the game to any value)
+* Game Quality control. (You can change the quality of the game to any value)
 * Function to set the skin with an ID.
 * Play button text changer.
 * Ads control. (They can be activated or deactivated).

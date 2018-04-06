@@ -37,7 +37,7 @@ localStorageTxt = "Your browser doesn't support localStorage, therefore, you can
 pTextTxt = "Play button text:", pTextNotChangedTxt = "Play button text not changed.", pTextChangedTxt = "Play button text changed to: ",
 sUnlockekdTxt = "You already have the skins unlocked.", sUnlockedsTxt = "The following skins were unlocked:", sChickenTxt = "Yellow chicken.", sBirdTxt = "Light blue bird.", sCowTxt = "Cow.", sBird2Txt = "Red bird.", sElephantTxt = "Elephant.",
 loadingScriptTxt = "Loading Superhex.io Scr1pt...",
-sAlreadyTxt = "You already have the skin ", sAlreadyTxt2 = "",
+sAlreadyTxt = "You are already using the skin ", sAlreadyTxt2 = "",
 keyActionsTxt = "Keys:\n\n1 = Hide/show Leaderboard.\n0 = Hide/show UI.\n2 = Show/hide FPS and other data.",
 partyTxt = "Party ID:", party5Txt = "The ID of the Party can't be less than 5.", party6Txt = "The ID of the Party can't be greater than 6.",
 highQB, MediumQB, lowQB;
@@ -66,20 +66,20 @@ changeLang = function(write, ing) {
     sChangedTxt = "Skin cambiada a: ";
     sErrorTxt = "Se ha producido un error. Asegúrate de insertar un ID válido.";
     sTheSTxt = "La skin ";
-    sNoExist = " no existe. Introduzca un número menor a 10.";
+    sNoExist = " no existe. Introduce un número menor a 10.";
     localStorageTxt = "Tu navegador no soporta localStorage, por lo tanto, no puedes utilizar esta función.";
 		pTextTxt = "Texto del botón Play:";
 		pTextNotChangedTxt = "Texto del botón Play no cambiado.";
 		pTextChangedTxt = "Texto del botón Play cambiado a: ";
-		sUnlockekdTxt = "Ya tienes los skins desbloqueados.";
-		sUnlockedsTxt = "Los siguientes skins fueron desbloqueados:";
+		sUnlockekdTxt = "Ya tienes las skins desbloqueadas.";
+		sUnlockedsTxt = "Las siguientes skins fueron desbloqueadas:";
 		sChickenTxt = "Pollo amarillo.";
 		sBirdTxt = "Ave celeste.";
 		sCowTxt = "Vaca.";
 		sBird2Txt = "Ave roja.";
 		sElephantTxt = "Elefante.";
-		sAlreadyTxt = "Ya tienes el skin ";
-		sAlreadyTxt2 = " puesto.";
+		sAlreadyTxt = "Ya tienes la skin ";
+		sAlreadyTxt2 = " puesta.";
 		partyTxt = "ID de la Party:";
 		party5Txt = "El ID de la Party no puede ser menor a 5.";
 		party6Txt = "El ID de la Party no puede ser mayor a 6.";
@@ -386,7 +386,6 @@ btn.setAttribute("onclick", "goGitHub();");
 document.getElementById("homepage").appendChild(btn);
 
 var btn2 = document.createElement("Button");
-//btn2.setAttribute("style", "position: fixed; top: 50px; right: 30px; height:25px; width:140px;");
 btn2.setAttribute("class", "green unselected");
 btn2.setAttribute("type", "button");
 btn2.setAttribute("id", "btn2");

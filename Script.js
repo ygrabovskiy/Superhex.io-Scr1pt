@@ -16,7 +16,7 @@ var adsDeleted = false,
 skinPag = 1,
 superhex = window.superhex,
 adsRestoredTxt = "Ads restored. The changes will take effect when the page is reloaded.", adBlockedTxt = "Ad blocked by Superhex.io Scr1pt", adsRemovedTxt = "Ads removed.",
-qChangeTxt = "Quality:\n0.5: Low\n0.75: Medium\n1: High", q27Txt = "WARNING: Setting the quality higher than 2.7 may cause problems.", q01Txt = "WARNING: Setting the quality lower than 0.1 may cause problems.", qInvalidTxt = "Invalid quality. You can only insert numbers.\nExample: 1.2", qNotChangedTxt = "Quality not changed.", qChangedTxt = "Quality changed to: ",
+qChangeTxt = "Insert value. Example:\n0.25: Very low\n0.5: Low\n0.75: Medium\n1: High\n1.5: Very high\n2: Ultra", q27Txt = "WARNING: Setting the quality higher than 2.7 may cause problems.", q01Txt = "WARNING: Setting the quality lower than 0.1 may cause problems.", qInvalidTxt = "Invalid quality. You can only insert numbers.\nExample: 1.2", qNotChangedTxt = "Quality not changed.", qChangedTxt = "Quality changed to: ",
 sChangeTxt = "Skin ID:\nNote: To set the Skin 0 should use 0.1", sInvalidTxt = "Invalid ID. You can only insert numbers.", s0Txt = "Skin changed to: 0", sNotChangedTxt = "Skin not changed.", sChangedTxt = "Skin changed to: ", sErrorTxt = "An error has occurred. Make sure to insert a valid ID.", sTheSTxt = "The skin ", sNoExist = " doesn't exist. Enter a number less than 10.",
 pTextTxt = "Play button text:", pTextNotChangedTxt = "Play button text not changed.", pTextChangedTxt = "Play button text changed to: ",
 sUnlockekdTxt = "You already have the skins unlocked.", sUnlockedsTxt = "The following skins were unlocked:", sChickenTxt = "Yellow chicken.", sBirdTxt = "Light blue bird.", sCowTxt = "Cow.", sBird2Txt = "Red bird.", sElephantTxt = "Elephant.",
@@ -37,7 +37,7 @@ window.changeLang = function(write, ing) {
     adsRestoredTxt = "Anuncios restaurados. Para que sean visibles, es necesario recargar la página.";
     adBlockedTxt = "Anuncio bloqueado por Superhex.io Scr1pt";
     adsRemovedTxt = "Anuncios removidos.";
-    qChangeTxt = "Calidad:\n0.5: Baja\n0.75: Media\n1: Alta";
+    qChangeTxt = "Insertar valor. Ejemplo:\n0.25: Muy baja\n0.5: Baja\n0.75: Media\n1: Alta\n1.5: Muy alta\n2: Ultra";
     q27Txt = "ADVERTENCIA: Establecer la calidad mayor a 2.7 puede causar problemas.";
     q01Txt = "ADVERTENCIA: Establecer la calidad menor a 0.1 puede causar problemas.";
     qInvalidTxt = "Calidad inválida. Solo puedes insertar números.\nEjemplo: 1.2";

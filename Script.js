@@ -81,6 +81,7 @@ window.changeLang = function(write, ing) {
     Language = "ES";
     if(write) {
       localStorage.setItem('LangTBM', 'ES');
+      if(btn2.getAttribute("class") == "green") document.getElementById("btn2").innerText = "Calidad personalizada (" + currQuality.toString() + ")";
       alert("Idioma cambiado a Español.");
     }
   }

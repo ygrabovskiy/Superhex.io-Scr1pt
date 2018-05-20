@@ -2,6 +2,7 @@
 // @name         Superhex.io Scr1pt
 // @namespace    Superhex.io Scr1pt
 // @version      1.6.0
+// @license      GPL-3.0
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
 // @icon         http://superhex.io/img/fav_icon_1.png
 // @description  Script for Superhex.io

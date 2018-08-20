@@ -10,6 +10,8 @@
 // @author       Truebamateo
 // @match        http://superhex.io/*
 // @grant        none
+// @contributionURL https://www.paypal.me/tbm13
+
 // ==/UserScript==
 
 var Text1TBM = localStorage.getItem("Text1TBM"), AdsTBM = localStorage.getItem("AdsTBM"), Language = localStorage.getItem("LangTBM"), currSkin = localStorage.getItem("selectedSkin"), currQuality = localStorage.getItem("quality"), zoomHack = localStorage.getItem("zoomTBM");

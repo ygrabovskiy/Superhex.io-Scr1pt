@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Superhex.io Scr1pt
 // @namespace    Superhex.io Scr1pt
-// @version      1.6.0
+// @version      1.7.0
 // @license      GPL-3.0
 // @homepageURL  https://github.com/Truebamateo/Superhex.io-Scr1pt
 // @icon         http://superhex.io/img/fav_icon_1.png
@@ -12,7 +12,7 @@
 // @grant        none
 // ==/UserScript==
 
-var Text1TBM = localStorage.getItem("Text1TBM"), AdsTBM = localStorage.getItem("AdsTBM"), Language = localStorage.getItem("LangTBM"), currSkin = localStorage.getItem("selectedSkin"), currQuality = localStorage.getItem("quality");
+var Text1TBM = localStorage.getItem("Text1TBM"), AdsTBM = localStorage.getItem("AdsTBM"), Language = localStorage.getItem("LangTBM"), currSkin = localStorage.getItem("selectedSkin"), currQuality = localStorage.getItem("quality"), zoomHack = localStorage.getItem("zoomTBM");
 var adsDeleted = false,
 skinPag = 1,
 superhex = window.superhex,
@@ -25,6 +25,7 @@ loadingScriptTxt = "Loading Superhex.io Scr1pt...",
 sAlreadyTxt = "You are already using the skin ",
 keyActionsTxt = "Keys:\n\n1 = Hide/show Leaderboard.\n0 = Hide/show UI.\n2 = Show/hide FPS and other data.",
 partyTxt = "Party ID:", party5Txt = "The ID of the Party can't be less than 5.", party6Txt = "The ID of the Party can't be greater than 6.",
+zoomTxt = "Zoom hack enabled.", zoomTxt2 = "Zoom hack disabled. The changes will take effect when the page is reloaded.",
 highQB, MediumQB, lowQB;
 
 window.changeLang = function(write, ing) {
@@ -70,12 +71,15 @@ window.changeLang = function(write, ing) {
 		document.getElementById("btn2").innerText = "Calidad personalizada";
 		document.getElementById("btn3").innerText = "Establecer Skin (ID)";
 		document.getElementById("btn5").innerText = "Texto del botón Play";
-		document.getElementById("check1Text").innerText = "Remover anuncios";
+    document.getElementById("check1Text").innerText = "Remover anuncios";
+    document.getElementById("check2Text").innerText = "Hack de Zoom";
 		document.getElementById("btn6").innerText = "Desbloquear skins";
 		document.getElementById("btn7").innerText = "English (Inglés)";
 		document.getElementById("btn7").setAttribute("onclick", "changeLang(false, true);");
 		document.getElementById("btn8").innerText = "Crear Party";
     document.getElementById("scrText2").innerText = keyActionsTxt;
+    zoomTxt = "Hack de Zoom habilitado.";
+    zoomTxt2 = "Hack de Zoom deshabilitado. Los cambios tendrán efecto cuando se recargue la página.";
     highQB.innerText = "Alta";
     MediumQB.innerText = "Media";
     lowQB.innerText = "Baja";
@@ -101,6 +105,7 @@ window.onload = function () {
   if(AdsTBM) this.removeAds(false);
   if(Text1TBM) document.getElementById("button-play-text").innerText = Text1TBM;
   if(currQuality == null) this.changeQuality(0.75); else this.changeQuality(currQuality);
+  if(zoomHack == "True") this.zoomH(false);
   highQB.setAttribute("onclick", "changeQuality(1);");
   MediumQB.setAttribute("onclick", "changeQuality(0.75);");
   lowQB.setAttribute("onclick", "changeQuality(0.5);");
@@ -342,6 +347,22 @@ window.mkParty = function() {
 	}
 };
 
+window.zoomH = function(message) {
+  if(zoomHack == "True" && message) {
+    localStorage.removeItem("zoomTBM");
+    zoomHack = this.localStorage.getItem("zoomTBM");
+    alert(zoomTxt2);
+  } else {
+    Math.max = function(){return 13;}
+    if(message) {
+      this.localStorage.setItem("zoomTBM", "True");
+      zoomHack = this.localStorage.getItem("zoomTBM");
+      alert(zoomTxt);
+    }
+  }
+
+}
+
 var scrText1 = document.createElement("h2");
 scrText1.setAttribute("style", "color: white; position: fixed; top: 80px; left: 30px;");
 scrText1.innerText = loadingScriptTxt;
@@ -349,7 +370,7 @@ document.getElementById("homepage").appendChild(scrText1);
 
 window.mkGui = function() {
 
-scrText1.innerText = "Superhex.io Scr1pt v1.6";
+scrText1.innerText = "Superhex.io Scr1pt v1.7";
 
 var btn = document.createElement("Button");
 btn.setAttribute("style", "position: fixed; top: 140px; left: 30px; height:25px; width:140px;");
@@ -442,4 +463,19 @@ scrText2.setAttribute("style", "color: white; position: fixed; top: 50px; right:
 scrText2.setAttribute("id", "scrText2");
 scrText2.innerText = keyActionsTxt;
 document.getElementById("homepage").appendChild(scrText2);
+
+var Check2 = document.createElement("INPUT");
+Check2.setAttribute("type", "checkbox");
+Check2.setAttribute("id", "checkZoom");
+Check2.setAttribute("style", "position: fixed; top: 408px; left: 30px;");
+Check2.setAttribute("onclick", "zoomH(true);");
+document.getElementById("homepage").appendChild(Check2);
+
+if(zoomHack == "True") Check2.checked = true;
+
+var check2Text = document.createElement("h5");
+check2Text.setAttribute("style", "color: white; position: fixed; top: 388px; left: 50px;");
+check2Text.setAttribute("id", "check2Text");
+check2Text.innerText = "Zoom Hack";
+document.getElementById("homepage").appendChild(check2Text);
 };

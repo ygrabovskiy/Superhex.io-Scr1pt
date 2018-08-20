@@ -1,5 +1,6 @@
 # Superhex.io Scr1pt
 <b>This script has the following features:</b>
+* Zoom Hack.
 * Game Quality control. (You can change the quality of the game to any value)
 * Function to set the skin with an ID.
 * Play button text changer.
@@ -11,6 +12,7 @@
 * Available in English and Spanish.
 
 <b>Este script tiene las siguientes características:</b>
+* Hack de Zoom.
 * Control de calidad del juego. (Se puede cambiar la calidad del juego a cualquier valor)
 * Función para establecer el skin con un ID.
 * Cambiador del texto del botón Play (Jugar).

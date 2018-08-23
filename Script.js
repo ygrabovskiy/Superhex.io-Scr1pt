@@ -14,7 +14,7 @@
 
 // ==/UserScript==
 
-var Text1TBM = localStorage.getItem("Text1TBM"), AdsTBM = localStorage.getItem("AdsTBM"), Language = localStorage.getItem("LangTBM"), currSkin = localStorage.getItem("selectedSkin"), currQuality = localStorage.getItem("quality"), zoomHack = localStorage.getItem("zoomTBM");
+var Text1TBM = localStorage.getItem("Text1TBM"), AdsTBM = localStorage.getItem("AdsTBM"), Language = localStorage.getItem("LangTBM"), currSkin = localStorage.getItem("selectedSkin"), currQuality = localStorage.getItem("quality"), zoomHack = localStorage.getItem("zoomTBM"), miniMode = localStorage.getItem("miniModeTBM");
 var adsDeleted = false,
 skinPag = 1,
 superhex = window.superhex,
@@ -28,6 +28,7 @@ sAlreadyTxt = "You are already using the skin ",
 keyActionsTxt = "Keys:\n\n1 = Hide/show Leaderboard.\n0 = Hide/show UI.\n2 = Show/hide FPS and other data.",
 partyTxt = "Party ID:", party5Txt = "The ID of the Party can't be less than 5.", party6Txt = "The ID of the Party can't be greater than 6.",
 zoomTxt = "Zoom hack enabled.", zoomTxt2 = "Zoom hack disabled. The changes will take effect when the page is reloaded.",
+miniModeTxt = "Mini Mode enabled.", miniModeTxt2 = "Mini mode disabled. The changes will take effect when the page is reloaded.",
 highQB, MediumQB, lowQB;
 
 window.changeLang = function(write, ing) {
@@ -75,6 +76,7 @@ window.changeLang = function(write, ing) {
 		document.getElementById("btn5").innerText = "Texto del botón Play";
     document.getElementById("check1Text").innerText = "Remover anuncios";
     document.getElementById("check2Text").innerText = "Hack de Zoom";
+    document.getElementById("check3Text").innerText = "Modo Mini";
 		document.getElementById("btn6").innerText = "Desbloquear skins";
 		document.getElementById("btn7").innerText = "English (Inglés)";
 		document.getElementById("btn7").setAttribute("onclick", "changeLang(false, true);");
@@ -82,6 +84,8 @@ window.changeLang = function(write, ing) {
     document.getElementById("scrText2").innerText = keyActionsTxt;
     zoomTxt = "Hack de Zoom habilitado.";
     zoomTxt2 = "Hack de Zoom deshabilitado. Los cambios tendrán efecto cuando se recargue la página.";
+    miniModeTxt = "Modo Mini habilitado.";
+    miniModeTxt2 = "Modo Mini deshabilitado. Los cambios tendrán efecto cuando se recargue la página.";
     highQB.innerText = "Alta";
     MediumQB.innerText = "Media";
     lowQB.innerText = "Baja";
@@ -105,6 +109,7 @@ window.onload = function () {
   lowQB = document.getElementById("button-quality-low");
   if(Language == "ES") this.changeLang(false, false);
   if(AdsTBM) this.removeAds(false);
+  if(miniMode == "True") this.miniM(false);
   if(Text1TBM) document.getElementById("button-play-text").innerText = Text1TBM;
   if(currQuality == null) this.changeQuality(0.75); else this.changeQuality(currQuality);
   if(zoomHack == "True") this.zoomH(false);
@@ -352,17 +357,36 @@ window.mkParty = function() {
 window.zoomH = function(message) {
   if(zoomHack == "True" && message) {
     localStorage.removeItem("zoomTBM");
-    zoomHack = this.localStorage.getItem("zoomTBM");
     alert(zoomTxt2);
   } else {
     Math.max = function(){return 13;}
     if(message) {
-      this.localStorage.setItem("zoomTBM", "True");
-      zoomHack = this.localStorage.getItem("zoomTBM");
+      localStorage.setItem("zoomTBM", "True");      
       alert(zoomTxt);
     }
   }
+  zoomHack = localStorage.getItem("zoomTBM");
+};
 
+window.miniM = function(msg) {
+  if(miniMode == "True" && msg) {
+    localStorage.removeItem("miniModeTBM");
+    alert(miniModeTxt2);
+  } else {
+    document.getElementsByTagName("div").item(38).remove();
+    document.getElementsByTagName("td").item(1).remove();
+    var e = document.createElement("h5");
+    e.setAttribute("style", "color: white; position: fixed; top: 50px; right: 10px;");
+    e.setAttribute("id", "scrText2");
+    e.innerText = keyActionsTxt;
+    document.getElementById("scrText2").remove();
+    document.getElementById("homepage").appendChild(e);
+    if(msg) {
+      localStorage.setItem("miniModeTBM", "True");  
+      alert(miniModeTxt);
+    }
+  }
+  miniMode = localStorage.getItem("miniModeTBM");
 };
 
 var scrText1 = document.createElement("h2");
@@ -480,4 +504,19 @@ check2Text.setAttribute("style", "color: white; position: fixed; top: 388px; lef
 check2Text.setAttribute("id", "check2Text");
 check2Text.innerText = "Zoom Hack";
 document.getElementById("homepage").appendChild(check2Text);
+
+var Check3 = document.createElement("INPUT");
+Check3.setAttribute("type", "checkbox");
+Check3.setAttribute("id", "checkMiniMode");
+Check3.setAttribute("style", "position: fixed; top: 433px; left: 30px;");
+Check3.setAttribute("onclick", "miniM(true);");
+document.getElementById("homepage").appendChild(Check3);
+
+if(miniMode == "True") Check3.checked = true;
+
+var check3Text = document.createElement("h5");
+check3Text.setAttribute("style", "color: white; position: fixed; top: 413px; left: 50px;");
+check3Text.setAttribute("id", "check3Text");
+check3Text.innerText = "Mini Mode";
+document.getElementById("homepage").appendChild(check3Text);
 };

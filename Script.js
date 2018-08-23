@@ -363,7 +363,7 @@ window.zoomH = function(message) {
     }
   }
 
-}
+};
 
 var scrText1 = document.createElement("h2");
 scrText1.setAttribute("style", "color: white; position: fixed; top: 80px; left: 30px;");

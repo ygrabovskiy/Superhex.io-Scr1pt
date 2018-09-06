@@ -359,7 +359,7 @@ window.zoomH = function(message) {
     localStorage.removeItem("zoomTBM");
     alert(zoomTxt2);
   } else {
-    Math.max = function(){return 13;}
+    Math.max = function(){return 17;}
     if(message) {
       localStorage.setItem("zoomTBM", "True");      
       alert(zoomTxt);
